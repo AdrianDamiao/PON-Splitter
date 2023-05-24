@@ -62,7 +62,7 @@ export function Form() {
         <main className="h-screen flex flex-col gap-10 items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col gap-4 w-full max-w-xs"
+                className="flex flex-col gap-4 w-full max-w-xs text-left"
             >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="">Transmissão</label>
@@ -117,13 +117,13 @@ export function Form() {
                 </div>
                 <button
                     type="submit"
-                    className="px-4 bg-violet-500 rounded font-semibold text-white h-10 hover:bg-violet-800"
+                    className="px-4 bg-violet-500 rounded font-semibold text-white h-10 hover:bg-violet-600"
                 >
                     Calcular
                 </button>
             </form>
 
-            <pre>{answer}</pre>
+            <pre>Resultado: {answer}</pre>
         </main>
     );
 }
