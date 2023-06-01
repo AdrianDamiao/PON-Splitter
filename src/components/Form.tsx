@@ -68,7 +68,7 @@ export function Form() {
     };
 
     return (
-        <main className="h-screen flex flex-col gap-10 items-center justify-center">
+        <main className="h-full flex flex-col items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
                 className="flex flex-col gap-4 w-full max-w-lg text-left"
@@ -102,7 +102,7 @@ export function Form() {
                             htmlFor=""
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Coeficiente de Atenuação
+                            Atenuação
                         </label>
                         <div className="mt-2">
                             <input
@@ -188,7 +188,7 @@ export function Form() {
                 transmissionResult &&
                 receptionResult &&
                 attenuationResult && (
-                    <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="mt-10 w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                             Resultado
                         </h5>
@@ -205,7 +205,7 @@ export function Form() {
                                         Distância
                                     </td>
                                     <td className="border px-6 py-4">
-                                        {distanceResult}
+                                        {distanceResult} km
                                     </td>
                                 </tr>
                                 <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -216,7 +216,7 @@ export function Form() {
                                         Potência de Transmissão
                                     </th>
                                     <td className="border px-6 py-4">
-                                        {transmissionResult}
+                                        {transmissionResult} dBm
                                     </td>
                                 </tr>
                                 <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -227,7 +227,7 @@ export function Form() {
                                         Sensibilidade de Recepção
                                     </th>
                                     <td className="border px-6 py-4">
-                                        {receptionResult}
+                                        {receptionResult} dBm
                                     </td>
                                 </tr>
                                 <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -238,7 +238,7 @@ export function Form() {
                                         Atenuação
                                     </th>
                                     <td className="px-6 py-4">
-                                        {attenuationResult}
+                                        {attenuationResult} dBm/km
                                     </td>
                                 </tr>
                             </table>
