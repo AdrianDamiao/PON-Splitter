@@ -9,17 +9,19 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { Diagram } from "./Diagram";
 
 const calculateFormSchema = z.object({
     transmission: z.number(),
     attenuation: z.number(),
     distance: z.number(),
     reception: z.number(),
+    splitter: z.string(),
 });
 
 type CalculateFormData = z.infer<typeof calculateFormSchema>;
 
-export function Form() {
+export const Form = () => {
     const [answer, setAnswer] = useState<number>();
     const [distanceResult, setDistanceResult] = useState<number>();
     const [transmissionResult, setTransmissionResult] = useState<number>();
@@ -136,6 +138,7 @@ export function Form() {
                                     valueAsNumber: !isEmpty("distance"),
                                 })}
                             />
+
                             <div className="absolute inset-y-0 right-0 flex items-center">
                                 <label htmlFor="unidade" className="sr-only">
                                     Unidade
@@ -154,7 +157,7 @@ export function Form() {
                             <span>{errors.distance.message}</span>
                         )}
                     </div>
-                    <div className="sm:col-span-3 mb-4">
+                    <div className="sm:col-span-3">
                         <label
                             htmlFor=""
                             className="block text-sm font-medium leading-6 text-gray-900"
@@ -176,6 +179,21 @@ export function Form() {
                             <span>{errors.reception.message}</span>
                         )}
                     </div>
+                    <div className="sm:col-span-6 mb-4">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Splitter
+                        </label>
+                        <select
+                            className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                            {...register("splitter")}
+                        >
+                            <option selected>Selecione um splitter</option>
+                            <option value="splitter1">1:4</option>
+                            <option value="splitter2">1:8</option>
+                            <option value="splitter3">1:16</option>
+                            <option value="splitter4">1:32</option>
+                        </select>
+                    </div>
                 </div>
                 <button
                     type="submit"
@@ -195,6 +213,9 @@ export function Form() {
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
                         </p>
+                        <div className="mt-6 w-full max-w-md max-h-md">
+                            <Diagram splitter={"modelo4"} />
+                        </div>
                         <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -247,4 +268,4 @@ export function Form() {
                 )}
         </main>
     );
-}
+};
