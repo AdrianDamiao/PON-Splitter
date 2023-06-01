@@ -52,14 +52,19 @@ export function Form() {
         };
 
         if (distance == 0) {
-            setDistanceResult(CalculateWithoutDistance(specs));
+            specs.distance = CalculateWithoutDistance(specs);
         } else if (transmission == 0) {
-            setTransmissionResult(CalculateWithoutTransmissionPower(specs));
+            specs.transmissionPower = CalculateWithoutTransmissionPower(specs);
         } else if (reception == 0) {
-            setReceptionResult(CalculateWithoutReception(specs));
+            specs.receptionPower = CalculateWithoutReception(specs);
         } else if (attenuation == 0) {
-            setAttenuationResult(CalculateWithoutCoefficient(specs));
+            specs.attenuationCoefficient = CalculateWithoutCoefficient(specs);
         }
+
+        setDistanceResult(specs.distance);
+        setTransmissionResult(specs.transmissionPower);
+        setReceptionResult(specs.receptionPower);
+        setAttenuationResult(specs.attenuationCoefficient);
     };
 
     return (
@@ -79,6 +84,7 @@ export function Form() {
                         <div className="mt-2">
                             <input
                                 type="number"
+                                placeholder="0.00"
                                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 {...register("transmission", {
                                     valueAsNumber: !isEmpty("transmission"),
@@ -95,11 +101,12 @@ export function Form() {
                             htmlFor=""
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Atenuação
+                            Coeficiente de Atenuação
                         </label>
                         <div className="mt-2">
                             <input
                                 type="number"
+                                placeholder="0.00"
                                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                 {...register("attenuation", {
                                     valueAsNumber: !isEmpty("attenuation"),
@@ -154,6 +161,7 @@ export function Form() {
                         <div className="mt-2">
                             <input
                                 type="number"
+                                placeholder="0.00"
                                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                                 {...register("reception", {
                                     valueAsNumber: !isEmpty("reception"),
@@ -172,60 +180,33 @@ export function Form() {
                     Calcular
                 </button>
             </form>
-            <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-                <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                    Connect wallet
-                </h5>
-                <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
-                    Connect with one of our available wallet providers or create
-                    a new one.
-                </p>
-                <ul className="my-4 space-y-3">
-                    <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-                        >
-                            <span className="flex-1 ml-3 whitespace-nowrap">
-                                {distanceResult}
-                            </span>
-                            <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
-                                Popular
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-                        >
-                            <span className="flex-1 ml-3 whitespace-nowrap">
-                                {transmissionResult}
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-                        >
-                            <span className="flex-1 ml-3 whitespace-nowrap">
-                                Opera Wallet
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-                        >
-                            <span className="flex-1 ml-3 whitespace-nowrap">
-                                WalletConnect
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {distanceResult &&
+                transmissionResult &&
+                receptionResult &&
+                attenuationResult && (
+                    <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+                        <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                            Resultado
+                        </h5>
+                        <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
+                            Configurações da rede PON.
+                        </p>
+                        <div className="mt-4 grid grid-cols-1 p-3 gap-x-6 gap-y-8 sm:grid-cols-6 text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <div className="sm:col-span-3">
+                                <span>Distância: {distanceResult}</span>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <span>Transmissão: {transmissionResult}</span>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <span>Recepção: {receptionResult}</span>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <span>Atenuação: {attenuationResult}</span>
+                            </div>
+                        </div>
+                    </div>
+                )}
         </main>
     );
 }
