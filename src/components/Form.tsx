@@ -79,7 +79,7 @@ export function Form() {
                             htmlFor=""
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Transmissão
+                            Potência de Transmissão
                         </label>
                         <div className="mt-2">
                             <input
@@ -156,7 +156,7 @@ export function Form() {
                             htmlFor=""
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Recepção
+                            Sensibilidade do Receptor
                         </label>
                         <div className="mt-2">
                             <input
@@ -196,10 +196,15 @@ export function Form() {
                                 <span>Distância: {distanceResult}</span>
                             </div>
                             <div className="sm:col-span-3">
-                                <span>Transmissão: {transmissionResult}</span>
+                                <span>
+                                    Potência de Transmissão:{" "}
+                                    {transmissionResult}
+                                </span>
                             </div>
                             <div className="sm:col-span-3">
-                                <span>Recepção: {receptionResult}</span>
+                                <span>
+                                    Sensibilidade do Receptor: {receptionResult}
+                                </span>
                             </div>
                             <div className="sm:col-span-3">
                                 <span>Atenuação: {attenuationResult}</span>
