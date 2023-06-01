@@ -238,7 +238,7 @@ export function Form() {
                                         Atenuação
                                     </th>
                                     <td className="px-6 py-4">
-                                        {attenuationResult} dBm/km
+                                        {attenuationResult} dB/km
                                     </td>
                                 </tr>
                             </table>
