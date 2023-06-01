@@ -195,24 +195,53 @@ export function Form() {
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
                         </p>
-                        <div className="mt-4 grid grid-cols-1 p-3 gap-x-6 gap-y-8 sm:grid-cols-6 text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                            <div className="sm:col-span-3">
-                                <span>Distância: {distanceResult}</span>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <span>
-                                    Potência de Transmissão:{" "}
-                                    {transmissionResult}
-                                </span>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <span>
-                                    Sensibilidade do Receptor: {receptionResult}
-                                </span>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <span>Atenuação: {attenuationResult}</span>
-                            </div>
+                        <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
+                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td
+                                        scope="row"
+                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        Distância
+                                    </td>
+                                    <td className="border px-6 py-4">
+                                        {distanceResult}
+                                    </td>
+                                </tr>
+                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th
+                                        scope="row"
+                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        Potência de Transmissão
+                                    </th>
+                                    <td className="border px-6 py-4">
+                                        {transmissionResult}
+                                    </td>
+                                </tr>
+                                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th
+                                        scope="row"
+                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        Sensibilidade de Recepção
+                                    </th>
+                                    <td className="border px-6 py-4">
+                                        {receptionResult}
+                                    </td>
+                                </tr>
+                                <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th
+                                        scope="row"
+                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        Atenuação
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {attenuationResult}
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 )}
