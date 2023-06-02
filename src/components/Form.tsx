@@ -12,10 +12,21 @@ import { useState } from "react";
 import { Diagram } from "./Diagram";
 
 const calculateFormSchema = z.object({
-    transmission: z.number(),
-    attenuation: z.number(),
-    distance: z.number(),
-    reception: z.number(),
+    transmission: z.number({
+        invalid_type_error: "A potência de transmissão precisa ser um número",
+    }),
+    attenuation: z.number({
+        invalid_type_error: "A atenuação precisa ser um número",
+    }),
+    distance: z
+        .number({
+            invalid_type_error: "A distância precisa ser um número",
+        })
+        .nonnegative({ message: "A distância precisa ser maior ou igual a 1" }),
+    reception: z.number({
+        invalid_type_error:
+            "A Sensibilidade de receptção precisa ser um número",
+    }),
     splitter: z.string(),
 });
 
@@ -27,6 +38,7 @@ export const Form = () => {
     const [transmissionResult, setTransmissionResult] = useState<number>();
     const [receptionResult, setReceptionResult] = useState<number>();
     const [attenuationResult, setAttenuationResult] = useState<number>();
+    const [splitterResult, setSplitterResult] = useState<string>();
 
     const {
         register,
@@ -55,8 +67,6 @@ export const Form = () => {
             splitter: splitter,
         };
 
-        console.log(splitter);
-
         if (distance == 0) {
             specs.distance = CalculateWithoutDistance(specs);
         } else if (transmission == 0) {
@@ -67,6 +77,7 @@ export const Form = () => {
             specs.attenuationCoefficient = CalculateWithoutCoefficient(specs);
         }
 
+        setSplitterResult(specs.splitter);
         setDistanceResult(specs.distance);
         setTransmissionResult(specs.transmissionPower);
         setReceptionResult(specs.receptionPower);
@@ -81,10 +92,7 @@ export const Form = () => {
             >
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Potência de Transmissão
                         </label>
                         <div className="mt-2">
@@ -104,10 +112,7 @@ export const Form = () => {
                     </div>
 
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Atenuação
                         </label>
                         <div className="mt-2">
@@ -126,10 +131,7 @@ export const Form = () => {
                         )}
                     </div>
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Distância
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -162,10 +164,7 @@ export const Form = () => {
                         )}
                     </div>
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Sensibilidade do Receptor
                         </label>
                         <div className="mt-2">
@@ -191,11 +190,13 @@ export const Form = () => {
                             className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                             {...register("splitter")}
                         >
-                            <option selected>Selecione um splitter</option>
-                            <option value="splitter1">1:4</option>
-                            <option value="splitter2">1:8</option>
-                            <option value="splitter3">1:16</option>
-                            <option value="splitter4">1:32</option>
+                            <option value="" disabled>
+                                Selecione um splitter
+                            </option>
+                            <option value="1">1:4</option>
+                            <option value="2">1:8</option>
+                            <option value="3">1:16</option>
+                            <option value="4">1:32</option>
                         </select>
                     </div>
                 </div>
@@ -209,7 +210,8 @@ export const Form = () => {
             {distanceResult &&
                 transmissionResult &&
                 receptionResult &&
-                attenuationResult && (
+                attenuationResult &&
+                splitterResult && (
                     <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                             Resultado
@@ -218,7 +220,7 @@ export const Form = () => {
                             Configurações da rede PON.
                         </p>
                         <div className="mt-6 w-full">
-                            <Diagram splitter={"modelo4"} />
+                            <Diagram splitter={splitterResult} />
                         </div>
                         <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
