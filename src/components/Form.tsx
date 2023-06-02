@@ -45,13 +45,17 @@ export const Form = () => {
         reception,
         attenuation,
         distance,
+        splitter,
     }: CalculateFormData) => {
         const specs: IPonSpecs = {
             transmissionPower: transmission,
             receptionPower: reception,
             attenuationCoefficient: attenuation,
             distance: distance,
+            splitter: splitter,
         };
+
+        console.log(splitter);
 
         if (distance == 0) {
             specs.distance = CalculateWithoutDistance(specs);
@@ -73,7 +77,7 @@ export const Form = () => {
         <main className="h-full flex flex-col items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col gap-4 w-full max-w-lg text-left"
+                className="flex flex-col gap-4 w-full max-w-2xl text-left"
             >
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
@@ -206,62 +210,64 @@ export const Form = () => {
                 transmissionResult &&
                 receptionResult &&
                 attenuationResult && (
-                    <div className="mt-10 w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                             Resultado
                         </h5>
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
                         </p>
-                        <div className="mt-6 w-full max-w-md max-h-md">
+                        <div className="mt-6 w-full">
                             <Diagram splitter={"modelo4"} />
                         </div>
                         <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Distância
-                                    </td>
-                                    <td className="border px-6 py-4">
-                                        {distanceResult} km
-                                    </td>
-                                </tr>
-                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Potência de Transmissão
-                                    </th>
-                                    <td className="border px-6 py-4">
-                                        {transmissionResult} dBm
-                                    </td>
-                                </tr>
-                                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Sensibilidade de Recepção
-                                    </th>
-                                    <td className="border px-6 py-4">
-                                        {receptionResult} dBm
-                                    </td>
-                                </tr>
-                                <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Atenuação
-                                    </th>
-                                    <td className="px-6 py-4">
-                                        {attenuationResult} dB/km
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Distância
+                                        </td>
+                                        <td className="border px-6 py-4">
+                                            {distanceResult} km
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Potência de Transmissão
+                                        </th>
+                                        <td className="border px-6 py-4">
+                                            {transmissionResult} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Sensibilidade de Recepção
+                                        </th>
+                                        <td className="border px-6 py-4">
+                                            {receptionResult} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Atenuação
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {attenuationResult} dB/km
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
