@@ -158,6 +158,179 @@ const splitter2Edges = [
     { id: "e2-10", source: "2", target: "10" },
 ];
 
+const splitter3Nodes = [
+    {
+        id: "1",
+        position: { x: 0, y: 0 },
+        data: { label: "OLT" },
+        sourcePosition: "right",
+        type: "input",
+    },
+    {
+        id: "2",
+        position: { x: 200, y: 0 },
+        data: { label: "Splitter 1:16" },
+        sourcePosition: "right",
+        targetPosition: "left",
+    },
+    {
+        id: "3",
+        position: { x: 500, y: -400 },
+        data: { label: "ONT 1" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "4",
+        position: { x: 500, y: -350 },
+        data: { label: "ONT 2" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "5",
+        position: { x: 500, y: -300 },
+        data: { label: "ONT 3" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "6",
+        position: { x: 500, y: -250 },
+        data: { label: "ONT 4" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "7",
+        position: { x: 500, y: -200 },
+        data: { label: "ONT 5" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "8",
+        position: { x: 500, y: -150 },
+        data: { label: "ONT 6" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "9",
+        position: { x: 500, y: -100 },
+        data: { label: "ONT 7" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "10",
+        position: { x: 500, y: -50 },
+        data: { label: "ONT 8" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "11",
+        position: { x: 500, y: 0 },
+        data: { label: "ONT 9" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "12",
+        position: { x: 500, y: 50 },
+        data: { label: "ONT 10" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "13",
+        position: { x: 500, y: 100 },
+        data: { label: "ONT 11" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "14",
+        position: { x: 500, y: 150 },
+        data: { label: "ONT 12" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "15",
+        position: { x: 500, y: 200 },
+        data: { label: "ONT 13" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "16",
+        position: { x: 500, y: 250 },
+        data: { label: "ONT 14" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "17",
+        position: { x: 500, y: 300 },
+        data: { label: "ONT 15" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+    {
+        id: "18",
+        position: { x: 500, y: 350 },
+        data: { label: "ONT 16" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+];
+
+const splitter3Edges = [
+    { id: "e1-2", source: "1", target: "2" },
+    { id: "e2-3", source: "2", target: "3" },
+    { id: "e2-4", source: "2", target: "4" },
+    { id: "e2-5", source: "2", target: "5" },
+    { id: "e2-6", source: "2", target: "6" },
+    { id: "e2-7", source: "2", target: "7" },
+    { id: "e2-8", source: "2", target: "8" },
+    { id: "e2-9", source: "2", target: "9" },
+    { id: "e2-10", source: "2", target: "10" },
+    { id: "e2-11", source: "2", target: "11" },
+    { id: "e2-12", source: "2", target: "12" },
+    { id: "e2-13", source: "2", target: "13" },
+    { id: "e2-14", source: "2", target: "14" },
+    { id: "e2-15", source: "2", target: "15" },
+    { id: "e2-16", source: "2", target: "16" },
+    { id: "e2-17", source: "2", target: "17" },
+    { id: "e2-18", source: "2", target: "18" },
+];
+
 type splitterProps = {
     splitter: string;
 };
@@ -174,6 +347,9 @@ export const Diagram = ({ splitter }: splitterProps) => {
     } else if (splitter == "2") {
         initialNodes = splitter2Nodes;
         initialEdges = splitter2Edges;
+    } else if (splitter == "3") {
+        initialNodes = splitter3Nodes;
+        initialEdges = splitter3Edges;
     }
 
     return (

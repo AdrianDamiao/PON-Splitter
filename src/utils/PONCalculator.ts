@@ -8,9 +8,7 @@ export const CalculateWithoutDistance = (ponSpecs: IPonSpecs) => {
 }
 
 export const CalculateWithoutTransmissionPower = (ponSpecs: IPonSpecs) => {
-  console.log(ponSpecs);
   const transmissionPower = ponSpecs.receptionPower + (ponSpecs.distance * ponSpecs.attenuationCoefficient);
-  console.log(transmissionPower);
   return transmissionPower;
 }
 export const CalculateWithoutReception = (ponSpecs: IPonSpecs) => {

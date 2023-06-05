@@ -39,6 +39,7 @@ export const Form = () => {
     const [receptionResult, setReceptionResult] = useState<number>();
     const [attenuationResult, setAttenuationResult] = useState<number>();
     const [splitterResult, setSplitterResult] = useState<string>();
+    const [selectedUnity, setSelectedUnity] = useState('');
 
     const {
         register,
@@ -83,6 +84,10 @@ export const Form = () => {
         setReceptionResult(specs.receptionPower);
         setAttenuationResult(specs.attenuationCoefficient);
     };
+
+    const handleUnityChange = (event) => {
+        setSelectedUnity(event.target.value);
+    }
 
     return (
         <main className="h-full flex flex-col items-center justify-center">
@@ -153,9 +158,11 @@ export const Form = () => {
                                     id="unidade"
                                     name="unidade"
                                     className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                    onChange={handleUnityChange}
+                                    value={selectedUnity}
                                 >
-                                    <option>km</option>
-                                    <option>m</option>
+                                    <option value="1">m</option>
+                                    <option value="2">km</option>
                                 </select>
                             </div>
                         </div>
