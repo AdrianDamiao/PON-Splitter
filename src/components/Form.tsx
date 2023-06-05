@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import IPonSpecs from "../models/PonSpecs";
 import {
-    CalculateWithoutCoefficient,
-    CalculateWithoutDistance,
-    CalculateWithoutReception,
-    CalculateWithoutTransmissionPower,
+    CalculateCoefficient,
+    CalculateDistance,
+    CalculateReception,
+    CalculateTransmissionPower,
 } from "../utils/PONCalculator";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -69,13 +69,13 @@ export const Form = () => {
         };
 
         if (distance == 0) {
-            specs.distance = CalculateWithoutDistance(specs);
+            specs.distance = CalculateDistance(specs);
         } else if (transmission == 0) {
-            specs.transmissionPower = CalculateWithoutTransmissionPower(specs);
+            specs.transmissionPower = CalculateTransmissionPower(specs);
         } else if (reception == 0) {
-            specs.receptionPower = CalculateWithoutReception(specs);
+            specs.receptionPower = CalculateReception(specs);
         } else if (attenuation == 0) {
-            specs.attenuationCoefficient = CalculateWithoutCoefficient(specs);
+            specs.attenuationCoefficient = CalculateCoefficient(specs);
         }
 
         setSplitterResult(specs.splitter);
