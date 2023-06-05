@@ -200,10 +200,12 @@ export const Form = () => {
                             <option value="" disabled>
                                 Selecione um splitter
                             </option>
-                            <option value="1">1:4</option>
-                            <option value="2">1:8</option>
-                            <option value="3">1:16</option>
-                            <option value="4">1:32</option>
+                            <option value="0">Sem Splitter</option>
+                            <option value="1">1:2</option>
+                            <option value="2">1:4</option>
+                            <option value="3">1:8</option>
+                            <option value="4">1:16</option>
+                            <option value="5">1:32</option>
                         </select>
                     </div>
                 </div>

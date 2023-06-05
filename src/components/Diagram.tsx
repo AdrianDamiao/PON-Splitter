@@ -2,7 +2,78 @@ import ReactFlow, { Controls } from "reactflow";
 
 import "reactflow/dist/style.css";
 
+const splitter0Nodes = [
+    {
+        id: "1",
+        position: { x: 0, y: 0 },
+        data: { label: "OLT" },
+        sourcePosition: "right",
+        type: "input",
+    },
+    {
+        id: "2",
+        position: { x: 200, y: 0 },
+        data: { label: "Splitter 1:2" },
+        sourcePosition: "right",
+        targetPosition: "left",
+    },
+    {
+        id: "3",
+        position: { x: 400, y: 0 },
+        data: { label: "ONT 1" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+];
+
+const splitter0Edges = [
+    { id: "e1-2", source: "1", target: "2" },
+    { id: "e2-3", source: "2", target: "3" },
+];
+
 const splitter1Nodes = [
+    {
+        id: "1",
+        position: { x: 0, y: 0 },
+        data: { label: "OLT" },
+        sourcePosition: "right",
+        type: "input",
+    },
+    {
+        id: "2",
+        position: { x: 200, y: 0 },
+        data: { label: "Splitter 1:2" },
+        sourcePosition: "right",
+        targetPosition: "left",
+    },
+    {
+        id: "3",
+        position: { x: 500, y: 100 },
+        data: { label: "ONT 1" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+
+    {
+        id: "4",
+        position: { x: 500, y: -100 },
+        data: { label: "ONT 2" },
+        sourcePosition: "right",
+        type: "output",
+        targetPosition: "left",
+    },
+];
+
+const splitter1Edges = [
+    { id: "e1-2", source: "1", target: "2" },
+    { id: "e2-3", source: "2", target: "3" },
+    { id: "e2-4", source: "2", target: "4" },
+    { id: "e2-5", source: "2", target: "5" },
+];
+
+const splitter2Nodes = [
     {
         id: "1",
         position: { x: 0, y: 0 },
@@ -53,7 +124,7 @@ const splitter1Nodes = [
     },
 ];
 
-const splitter1Edges = [
+const splitter2Edges = [
     { id: "e1-2", source: "1", target: "2" },
     { id: "e2-3", source: "2", target: "3" },
     { id: "e2-4", source: "2", target: "4" },
@@ -61,7 +132,7 @@ const splitter1Edges = [
     { id: "e2-6", source: "2", target: "6" },
 ];
 
-const splitter2Nodes = [
+const splitter3Nodes = [
     {
         id: "1",
         position: { x: 0, y: 0 },
@@ -146,7 +217,7 @@ const splitter2Nodes = [
     },
 ];
 
-const splitter2Edges = [
+const splitter3Edges = [
     { id: "e1-2", source: "1", target: "2" },
     { id: "e2-3", source: "2", target: "3" },
     { id: "e2-4", source: "2", target: "4" },
@@ -158,7 +229,7 @@ const splitter2Edges = [
     { id: "e2-10", source: "2", target: "10" },
 ];
 
-const splitter3Nodes = [
+const splitter4Nodes = [
     {
         id: "1",
         position: { x: 0, y: 0 },
@@ -311,7 +382,7 @@ const splitter3Nodes = [
     },
 ];
 
-const splitter3Edges = [
+const splitter4Edges = [
     { id: "e1-2", source: "1", target: "2" },
     { id: "e2-3", source: "2", target: "3" },
     { id: "e2-4", source: "2", target: "4" },
@@ -331,7 +402,7 @@ const splitter3Edges = [
     { id: "e2-18", source: "2", target: "18" },
 ];
 
-const splitter4Nodes = [
+const splitter5Nodes = [
     {
         id: "1",
         position: { x: 0, y: 0 },
@@ -620,7 +691,7 @@ const splitter4Nodes = [
     },
 ];
 
-const splitter4Edges = [
+const splitter5Edges = [
     { id: "e1-2", source: "1", target: "2" },
     { id: "e2-3", source: "2", target: "3" },
     { id: "e2-4", source: "2", target: "4" },
@@ -666,7 +737,10 @@ export const Diagram = ({ splitter }: splitterProps) => {
 
     console.log(splitter);
 
-    if (splitter == "1") {
+    if (splitter == "0") {
+        initialNodes = splitter0Nodes;
+        initialEdges = splitter0Edges;
+    } else if (splitter == "1") {
         initialNodes = splitter1Nodes;
         initialEdges = splitter1Edges;
     } else if (splitter == "2") {
@@ -678,6 +752,9 @@ export const Diagram = ({ splitter }: splitterProps) => {
     } else if (splitter == "4") {
         initialNodes = splitter4Nodes;
         initialEdges = splitter4Edges;
+    } else if (splitter == "5") {
+        initialNodes = splitter5Nodes;
+        initialEdges = splitter5Edges;
     }
 
     return (
