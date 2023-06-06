@@ -12,13 +12,6 @@ const splitter0Nodes = [
     },
     {
         id: "2",
-        position: { x: 200, y: 0 },
-        data: { label: "Splitter 1:2" },
-        sourcePosition: "right",
-        targetPosition: "left",
-    },
-    {
-        id: "3",
         position: { x: 400, y: 0 },
         data: { label: "ONT 1" },
         sourcePosition: "right",
@@ -29,7 +22,6 @@ const splitter0Nodes = [
 
 const splitter0Edges = [
     { id: "e1-2", source: "1", target: "2" },
-    { id: "e2-3", source: "2", target: "3" },
 ];
 
 const splitter1Nodes = [
@@ -734,8 +726,6 @@ type splitterProps = {
 export const Diagram = ({ splitter }: splitterProps) => {
     let initialNodes;
     let initialEdges;
-
-    console.log(splitter);
 
     if (splitter == "0") {
         initialNodes = splitter0Nodes;

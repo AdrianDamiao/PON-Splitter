@@ -64,8 +64,8 @@ export const Form = () => {
             transmissionPower: transmission,
             receptionPower: reception,
             attenuationCoefficient: attenuation,
-            distance: distance,
-            splitter: splitter,
+            distance: selectedUnity === "km" ? distance : distance * 1000,
+            splitter: (Number(splitter)*(-3)).toString(),
         };
 
         if (distance == 0) {
@@ -78,7 +78,7 @@ export const Form = () => {
             specs.attenuationCoefficient = CalculateCoefficient(specs);
         }
 
-        setSplitterResult(specs.splitter);
+        setSplitterResult((Number(specs.splitter)/-3).toString());
         setDistanceResult(specs.distance);
         setTransmissionResult(specs.transmissionPower);
         setReceptionResult(specs.receptionPower);
@@ -120,7 +120,7 @@ export const Form = () => {
                         <label className="block text-sm font-medium leading-6 text-gray-900">
                             Atenuação
                         </label>
-                        <div className="mt-2">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <input
                                 type="number"
                                 step=".01"
@@ -130,6 +130,19 @@ export const Form = () => {
                                     valueAsNumber: !isEmpty("attenuation"),
                                 })}
                             />
+                            <div className="absolute inset-y-0 right-0 flex items-center">
+                                <label htmlFor="unidade" className="sr-only">
+                                    Unidade
+                                </label>
+                                <select
+                                    disabled
+                                    id="unidadeAtenuacao"
+                                    name="unidadeAtenuacao"
+                                    className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                >
+                                    <option selected value="1">db/km</option>
+                                </select>
+                            </div>
                         </div>
                         {errors.attenuation && (
                             <span>{errors.attenuation.message}</span>
@@ -161,8 +174,8 @@ export const Form = () => {
                                     onChange={handleUnityChange}
                                     value={selectedUnity}
                                 >
-                                    <option value="1">m</option>
-                                    <option value="2">km</option>
+                                    <option value="m">m</option>
+                                    <option value="km">km</option>
                                 </select>
                             </div>
                         </div>
@@ -242,7 +255,7 @@ export const Form = () => {
                                             Distância
                                         </td>
                                         <td className="border px-6 py-4">
-                                            {distanceResult} km
+                                            {Number(distanceResult.toFixed(2)) >= 0 ? `${distanceResult.toFixed(2)} km` : "0 km"}
                                         </td>
                                     </tr>
                                     <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -253,7 +266,7 @@ export const Form = () => {
                                             Potência de Transmissão
                                         </th>
                                         <td className="border px-6 py-4">
-                                            {transmissionResult} dBm
+                                            {transmissionResult.toFixed(2)} dBm
                                         </td>
                                     </tr>
                                     <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -264,7 +277,7 @@ export const Form = () => {
                                             Sensibilidade de Recepção
                                         </th>
                                         <td className="border px-6 py-4">
-                                            {receptionResult} dBm
+                                            {receptionResult.toFixed(2)} dBm
                                         </td>
                                     </tr>
                                     <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -275,7 +288,7 @@ export const Form = () => {
                                             Atenuação
                                         </th>
                                         <td className="px-6 py-4">
-                                            {attenuationResult} dB/km
+                                            {Number(attenuationResult.toFixed(2)) >= 0 ? `${attenuationResult.toFixed(2)} dB/km` : "0 dB/km"}
                                         </td>
                                     </tr>
                                 </tbody>
