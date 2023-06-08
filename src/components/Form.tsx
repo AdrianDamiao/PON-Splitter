@@ -1,30 +1,45 @@
 import { useForm } from "react-hook-form";
 import IPonSpecs from "../models/PonSpecs";
 import {
-    CalculateWithoutCoefficient,
-    CalculateWithoutDistance,
-    CalculateWithoutReception,
-    CalculateWithoutTransmissionPower,
+    CalculateCoefficient,
+    CalculateDistance,
+    CalculateReception,
+    CalculateTransmissionPower,
 } from "../utils/PONCalculator";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { Diagram } from "./Diagram";
 
 const calculateFormSchema = z.object({
-    transmission: z.number(),
-    attenuation: z.number(),
-    distance: z.number(),
-    reception: z.number(),
+    transmission: z.number({
+        invalid_type_error: "A potência de transmissão precisa ser um número",
+    }),
+    attenuation: z.number({
+        invalid_type_error: "A atenuação precisa ser um número",
+    }),
+    distance: z
+        .number({
+            invalid_type_error: "A distância precisa ser um número",
+        })
+        .nonnegative({ message: "A distância precisa ser maior ou igual a 1" }),
+    reception: z.number({
+        invalid_type_error:
+            "A Sensibilidade de receptção precisa ser um número",
+    }),
+    splitter: z.string(),
 });
 
 type CalculateFormData = z.infer<typeof calculateFormSchema>;
 
-export function Form() {
+export const Form = () => {
     const [answer, setAnswer] = useState<number>();
     const [distanceResult, setDistanceResult] = useState<number>();
     const [transmissionResult, setTransmissionResult] = useState<number>();
     const [receptionResult, setReceptionResult] = useState<number>();
     const [attenuationResult, setAttenuationResult] = useState<number>();
+    const [splitterResult, setSplitterResult] = useState<string>();
+    const [selectedUnity, setSelectedUnity] = useState('');
 
     const {
         register,
@@ -43,42 +58,46 @@ export function Form() {
         reception,
         attenuation,
         distance,
+        splitter,
     }: CalculateFormData) => {
         const specs: IPonSpecs = {
             transmissionPower: transmission,
             receptionPower: reception,
             attenuationCoefficient: attenuation,
-            distance: distance,
+            distance: selectedUnity === "km" ? distance : distance * 1000,
+            splitter: (Number(splitter)*(-3)).toString(),
         };
 
         if (distance == 0) {
-            specs.distance = CalculateWithoutDistance(specs);
+            specs.distance = CalculateDistance(specs);
         } else if (transmission == 0) {
-            specs.transmissionPower = CalculateWithoutTransmissionPower(specs);
+            specs.transmissionPower = CalculateTransmissionPower(specs);
         } else if (reception == 0) {
-            specs.receptionPower = CalculateWithoutReception(specs);
+            specs.receptionPower = CalculateReception(specs);
         } else if (attenuation == 0) {
-            specs.attenuationCoefficient = CalculateWithoutCoefficient(specs);
+            specs.attenuationCoefficient = CalculateCoefficient(specs);
         }
 
+        setSplitterResult((Number(specs.splitter)/-3).toString());
         setDistanceResult(specs.distance);
         setTransmissionResult(specs.transmissionPower);
         setReceptionResult(specs.receptionPower);
         setAttenuationResult(specs.attenuationCoefficient);
     };
 
+    const handleUnityChange = (event) => {
+        setSelectedUnity(event.target.value);
+    }
+
     return (
         <main className="h-full flex flex-col items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col gap-4 w-full max-w-lg text-left"
+                className="flex flex-col gap-4 w-full max-w-2xl text-left"
             >
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Potência de Transmissão
                         </label>
                         <div className="mt-2">
@@ -98,13 +117,10 @@ export function Form() {
                     </div>
 
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Atenuação
                         </label>
-                        <div className="mt-2">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <input
                                 type="number"
                                 step=".01"
@@ -114,16 +130,26 @@ export function Form() {
                                     valueAsNumber: !isEmpty("attenuation"),
                                 })}
                             />
+                            <div className="absolute inset-y-0 right-0 flex items-center">
+                                <label htmlFor="unidade" className="sr-only">
+                                    Unidade
+                                </label>
+                                <select
+                                    disabled
+                                    id="unidadeAtenuacao"
+                                    name="unidadeAtenuacao"
+                                    className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                >
+                                    <option selected value="1">db/km</option>
+                                </select>
+                            </div>
                         </div>
                         {errors.attenuation && (
                             <span>{errors.attenuation.message}</span>
                         )}
                     </div>
                     <div className="sm:col-span-3">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Distância
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -136,6 +162,7 @@ export function Form() {
                                     valueAsNumber: !isEmpty("distance"),
                                 })}
                             />
+
                             <div className="absolute inset-y-0 right-0 flex items-center">
                                 <label htmlFor="unidade" className="sr-only">
                                     Unidade
@@ -144,9 +171,11 @@ export function Form() {
                                     id="unidade"
                                     name="unidade"
                                     className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
+                                    onChange={handleUnityChange}
+                                    value={selectedUnity}
                                 >
-                                    <option>km</option>
-                                    <option>m</option>
+                                    <option value="m">m</option>
+                                    <option value="km">km</option>
                                 </select>
                             </div>
                         </div>
@@ -154,11 +183,8 @@ export function Form() {
                             <span>{errors.distance.message}</span>
                         )}
                     </div>
-                    <div className="sm:col-span-3 mb-4">
-                        <label
-                            htmlFor=""
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
+                    <div className="sm:col-span-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
                             Sensibilidade do Receptor
                         </label>
                         <div className="mt-2">
@@ -176,6 +202,25 @@ export function Form() {
                             <span>{errors.reception.message}</span>
                         )}
                     </div>
+                    <div className="sm:col-span-6 mb-4">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Splitter
+                        </label>
+                        <select
+                            className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                            {...register("splitter")}
+                        >
+                            <option value="" disabled>
+                                Selecione um splitter
+                            </option>
+                            <option value="0">Sem Splitter</option>
+                            <option value="1">1:2</option>
+                            <option value="2">1:4</option>
+                            <option value="3">1:8</option>
+                            <option value="4">1:16</option>
+                            <option value="5">1:32</option>
+                        </select>
+                    </div>
                 </div>
                 <button
                     type="submit"
@@ -187,64 +232,70 @@ export function Form() {
             {distanceResult &&
                 transmissionResult &&
                 receptionResult &&
-                attenuationResult && (
-                    <div className="mt-10 w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+                attenuationResult &&
+                splitterResult && (
+                    <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                             Resultado
                         </h5>
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
                         </p>
+                        <div className="mt-6 w-full">
+                            <Diagram splitter={splitterResult} />
+                        </div>
                         <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Distância
-                                    </td>
-                                    <td className="border px-6 py-4">
-                                        {distanceResult} km
-                                    </td>
-                                </tr>
-                                <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Potência de Transmissão
-                                    </th>
-                                    <td className="border px-6 py-4">
-                                        {transmissionResult} dBm
-                                    </td>
-                                </tr>
-                                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Sensibilidade de Recepção
-                                    </th>
-                                    <td className="border px-6 py-4">
-                                        {receptionResult} dBm
-                                    </td>
-                                </tr>
-                                <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th
-                                        scope="row"
-                                        className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                    >
-                                        Atenuação
-                                    </th>
-                                    <td className="px-6 py-4">
-                                        {attenuationResult} dB/km
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Distância
+                                        </td>
+                                        <td className="border px-6 py-4">
+                                            {Number(distanceResult.toFixed(2)) >= 0 ? `${distanceResult.toFixed(2)} km` : "0 km"}
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Potência de Transmissão
+                                        </th>
+                                        <td className="border px-6 py-4">
+                                            {transmissionResult.toFixed(2)} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Sensibilidade de Recepção
+                                        </th>
+                                        <td className="border px-6 py-4">
+                                            {receptionResult.toFixed(2)} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Atenuação
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {Number(attenuationResult.toFixed(2)) >= 0 ? `${attenuationResult.toFixed(2)} dB/km` : "0 dB/km"}
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 )}
         </main>
     );
-}
+};
