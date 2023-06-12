@@ -147,7 +147,7 @@ export const Form = () => {
                             />
                             <div className="absolute inset-y-1/4 right-0 flex items-center">
                                 <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
-                                    db/km
+                                    dB/km
                                 </span>
                             </div>
                         </div>
@@ -228,7 +228,7 @@ export const Form = () => {
                             />
                             <div className="absolute inset-y-1/4 right-0 flex items-center">
                                 <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
-                                    db
+                                    dB
                                 </span>
                             </div>
                         </div>
@@ -255,7 +255,7 @@ export const Form = () => {
                             />
                             <div className="absolute inset-y-1/4 right-0 flex items-center">
                                 <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
-                                    db
+                                    dB
                                 </span>
                             </div>
                         </div>
@@ -372,15 +372,10 @@ export const Form = () => {
                                             Atenuação do Conector
                                         </th>
                                         <td className="px-6 py-4">
-                                            {Number(
-                                                attenuationConectorResult.toFixed(
-                                                    2
-                                                )
-                                            ) >= 0
-                                                ? `${attenuationConectorResult.toFixed(
-                                                      2
-                                                  )} dB/km`
-                                                : "0 dB/km"}
+                                            {attenuationConectorResult.toFixed(
+                                                2
+                                            )}{" "}
+                                            dB
                                         </td>
                                     </tr>
                                     <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -391,15 +386,10 @@ export const Form = () => {
                                             Atenuação do ponto de fusão
                                         </th>
                                         <td className="px-6 py-4">
-                                            {Number(
-                                                attenuationFusionPointResult.toFixed(
-                                                    2
-                                                )
-                                            ) >= 0
-                                                ? `${attenuationFusionPointResult.toFixed(
-                                                      2
-                                                  )} dB/km`
-                                                : "0 dB/km"}
+                                            {attenuationFusionPointResult.toFixed(
+                                                2
+                                            )}{" "}
+                                            dB
                                         </td>
                                     </tr>
                                 </tbody>
