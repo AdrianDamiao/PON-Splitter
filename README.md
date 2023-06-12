@@ -9,4 +9,4 @@
 - [x] Adicionar orientação a objeto
 - [ ] Revisar responsividade
 - [ ] Refatorar o código -- Damiao
-- [ ] Mover coordernadas do diagrama para um arquivo separado
+- [x] Mover coordernadas do diagrama para um arquivo separado
