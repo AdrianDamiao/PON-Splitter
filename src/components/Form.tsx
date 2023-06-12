@@ -43,7 +43,7 @@ export const Form = () => {
     const [receptionResult, setReceptionResult] = useState<number>();
     const [attenuationResult, setAttenuationResult] = useState<number>();
     const [splitterResult, setSplitterResult] = useState<string>();
-    const [selectedUnity, setSelectedUnity] = useState("");
+    const [selectedUnity, setSelectedUnity] = useState("km");
     const [attenuationConectorResult, setAttenuationConectorResult] =
         useState<number>(0.5);
     const [attenuationFusionPointResult, setAttenuationFusionPointResult] =
