@@ -74,8 +74,8 @@ export const Form = () => {
             transmissionPower: transmission,
             receptionPower: reception,
             attenuationCoefficient: attenuation,
-            attenuationConector: attenuationConector,
-            attenuationFusionPoint: attenuationFusionPoint,
+            connectorAttenuation: attenuationConector,
+            fusionPointAttenuation: attenuationFusionPoint,
             distance: selectedUnity === "km" ? distance : (distance/1000),
             splitter: (Number(splitter) * -3).toString(),
         };
@@ -95,8 +95,8 @@ export const Form = () => {
         setTransmissionResult(specs.transmissionPower);
         setReceptionResult(specs.receptionPower);
         setAttenuationResult(specs.attenuationCoefficient);
-        setAttenuationConectorResult(specs.attenuationConector);
-        setAttenuationFusionPointResult(specs.attenuationFusionPoint);
+        setAttenuationConectorResult(specs.connectorAttenuation);
+        setAttenuationFusionPointResult(specs.fusionPointAttenuation);
     };
 
     const handleUnityChange = (event) => {
@@ -267,6 +267,7 @@ export const Form = () => {
                                 type="number"
                                 step=".001"
                                 placeholder="0.00"
+                                defaultValue={0}
                                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 {...register("distance", {
                                     valueAsNumber: !isEmpty("distance"),
