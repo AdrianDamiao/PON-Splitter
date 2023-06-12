@@ -111,6 +111,11 @@ export const Form = () => {
                 className="flex flex-col gap-4 w-full max-w-2xl text-left md:pr-8"
             >
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="sm:col-span-6">
+                        <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                            Calculo da Rede PON
+                        </h5>
+                    </div>
                     <div className="sm:col-span-3">
                         <label className="block text-sm font-medium leading-6 text-gray-900">
                             Potência de Transmissão
@@ -297,7 +302,7 @@ export const Form = () => {
                 splitterResult && (
                     <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                            Resultado da Rede PON
+                            Resultado
                         </h5>
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
