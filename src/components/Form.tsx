@@ -105,14 +105,14 @@ export const Form = () => {
     };
 
     return (
-        <main className="h-full flex flex-col sm:flex-row-reverse items-center justify-center">
+        <main className="h-full flex flex-col md:flex-row-reverse items-center justify-center">
             {distanceResult &&
                 transmissionResult &&
                 receptionResult &&
                 attenuationResult &&
                 splitterResult && (
-                    <div className="my-4 w-full max-w-2xl pl-8">
-                        <div className="mt-6 w-full">
+                    <div className="my-4 w-full max-w-2xl px-8">
+                        <div className="mt-3 w-full">
                             <Diagram splitter={splitterResult} />
                         </div>
                         <div className="mt-6 relative border overflow-x-auto sm:rounded-lg">
@@ -209,14 +209,12 @@ export const Form = () => {
                 )}
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col w-full max-w-2xl text-left"
+                className="flex flex-col w-full max-w-2xl text-left px-8"
             >
-                <div className="my-4 px-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-6">
-                        <h5 className="text-left mb-3 text-xl font-semibold text-gray-900 md:text-2xl dark:text-white">
-                            Cálculo da Rede PON
-                        </h5>
-                    </div>
+                <h5 className="text-left mb-3 text-xl font-semibold text-gray-900 md:text-2xl leading-7">
+                    Cálculo da Rede PON
+                </h5>
+                <div className="my-4 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
                     <div className="sm:col-span-3">
                         <label className="block text-sm font-medium leading-6 text-gray-900">
                             Potência de Transmissão
