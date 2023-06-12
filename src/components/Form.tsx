@@ -24,8 +24,7 @@ const calculateFormSchema = z.object({
         })
         .nonnegative({ message: "A distância precisa ser maior ou igual a 1" }),
     reception: z.number({
-        invalid_type_error:
-            "A Sensibilidade de receptção precisa ser um número",
+        invalid_type_error: "A Sensibilidade de recepção precisa ser um número",
     }),
     attenuationConector: z.number({
         invalid_type_error: "A atenuação precisa ser um número",
@@ -77,7 +76,7 @@ export const Form = () => {
             attenuationCoefficient: attenuation,
             attenuationConector: attenuationConector,
             attenuationFusionPoint: attenuationFusionPoint,
-            distance: selectedUnity === "km" ? distance : distance * 1000,
+            distance: selectedUnity === "km" ? distance : (distance/1000),
             splitter: (Number(splitter) * -3).toString(),
         };
 
