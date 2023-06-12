@@ -105,15 +105,116 @@ export const Form = () => {
     };
 
     return (
-        <main className="h-full flex flex-col items-center justify-center">
+        <main className="h-full flex flex-col sm:flex-row-reverse items-center justify-center">
+            {distanceResult &&
+                transmissionResult &&
+                receptionResult &&
+                attenuationResult &&
+                splitterResult && (
+                    <div className="my-4 w-full max-w-2xl pl-8">
+                        <div className="mt-6 w-full">
+                            <Diagram splitter={splitterResult} />
+                        </div>
+                        <div className="mt-6 relative border overflow-x-auto sm:rounded-lg">
+                            <table className="w-full text-sm text-left text-gray-500">
+                                <tbody>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <td
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Distância
+                                        </td>
+                                        <td className="px-6 py-4 border-l">
+                                            {Number(
+                                                distanceResult.toFixed(2)
+                                            ) >= 0
+                                                ? `${distanceResult.toFixed(
+                                                      2
+                                                  )} km`
+                                                : "0 km"}
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Potência de Transmissão
+                                        </th>
+                                        <td className="px-6 py-4 border-l">
+                                            {transmissionResult.toFixed(2)} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Sensibilidade de Recepção
+                                        </th>
+                                        <td className="px-6 py-4 border-l">
+                                            {receptionResult.toFixed(2)} dBm
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Atenuação
+                                        </th>
+                                        <td className="px-6 py-4 border-l">
+                                            {Number(
+                                                attenuationResult.toFixed(2)
+                                            ) >= 0
+                                                ? `${attenuationResult.toFixed(
+                                                      2
+                                                  )} dB/km`
+                                                : "0 dB/km"}
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Atenuação do Conector
+                                        </th>
+                                        <td className="px-6 py-4 border-l">
+                                            {attenuationConectorResult.toFixed(
+                                                2
+                                            )}{" "}
+                                            dB
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white hover:bg-gray-50 border-b">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        >
+                                            Atenuação do ponto de fusão
+                                        </th>
+                                        <td className="px-6 py-4 border-l">
+                                            {attenuationFusionPointResult.toFixed(
+                                                2
+                                            )}{" "}
+                                            dB
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
             <form
                 onSubmit={handleSubmit(calculate)}
                 className="flex flex-col w-full max-w-2xl text-left"
             >
-                <div className="mt-10 px-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="my-4 px-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-6">
                         <h5 className="text-left mb-3 text-xl font-semibold text-gray-900 md:text-2xl dark:text-white">
-                            Calculo da Rede PON
+                            Cálculo da Rede PON
                         </h5>
                     </div>
                     <div className="sm:col-span-3">
@@ -297,113 +398,6 @@ export const Form = () => {
                     </div>
                 </div>
             </form>
-            {distanceResult &&
-                transmissionResult &&
-                receptionResult &&
-                attenuationResult &&
-                splitterResult && (
-                    <div className="my-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-                        <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                            Resultado
-                        </h5>
-                        <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
-                            Configurações da rede PON.
-                        </p>
-                        <div className="mt-6 w-full">
-                            <Diagram splitter={splitterResult} />
-                        </div>
-                        <div className="mt-6 relative overflow-x-auto rounded-md sm:rounded-lg">
-                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <tbody>
-                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Distância
-                                        </td>
-                                        <td className="border px-6 py-4">
-                                            {Number(
-                                                distanceResult.toFixed(2)
-                                            ) >= 0
-                                                ? `${distanceResult.toFixed(
-                                                      2
-                                                  )} km`
-                                                : "0 km"}
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Potência de Transmissão
-                                        </th>
-                                        <td className="border px-6 py-4">
-                                            {transmissionResult.toFixed(2)} dBm
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Sensibilidade de Recepção
-                                        </th>
-                                        <td className="border px-6 py-4">
-                                            {receptionResult.toFixed(2)} dBm
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Atenuação
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            {Number(
-                                                attenuationResult.toFixed(2)
-                                            ) >= 0
-                                                ? `${attenuationResult.toFixed(
-                                                      2
-                                                  )} dB/km`
-                                                : "0 dB/km"}
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Atenuação do Conector
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            {attenuationConectorResult.toFixed(
-                                                2
-                                            )}{" "}
-                                            dB
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th
-                                            scope="row"
-                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            Atenuação do ponto de fusão
-                                        </th>
-                                        <td className="px-6 py-4">
-                                            {attenuationFusionPointResult.toFixed(
-                                                2
-                                            )}{" "}
-                                            dB
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                )}
         </main>
     );
 };

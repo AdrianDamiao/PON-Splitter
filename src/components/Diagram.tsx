@@ -1,4 +1,4 @@
-import ReactFlow, { Controls } from "reactflow";
+import ReactFlow, { Controls, Panel } from "reactflow";
 
 import "reactflow/dist/style.css";
 
@@ -20,9 +20,7 @@ const splitter0Nodes = [
     },
 ];
 
-const splitter0Edges = [
-    { id: "e1-2", source: "1", target: "2" },
-];
+const splitter0Edges = [{ id: "e1-2", source: "1", target: "2" }];
 
 const splitter1Nodes = [
     {
@@ -749,11 +747,16 @@ export const Diagram = ({ splitter }: splitterProps) => {
 
     return (
         <div
-            className="border w-fit rounded-md"
+            className="border w-fit rounded-xl"
             style={{ width: "100%", height: "40vh" }}
         >
             <ReactFlow nodes={initialNodes} edges={initialEdges} fitView>
                 <Controls />
+                <Panel position="top-left">
+                    <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                        Topologia PON
+                    </h5>
+                </Panel>
             </ReactFlow>
         </div>
     );
