@@ -209,7 +209,7 @@ export const Form = () => {
                 )}
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col w-full max-w-2xl text-left px-8"
+                className="flex flex-col w-full max-w-2xl text-left px-8 mt-8"
             >
                 <h5 className="text-left mb-3 text-xl font-semibold text-gray-900 md:text-2xl leading-7">
                     Cálculo da Rede PON
@@ -266,7 +266,7 @@ export const Form = () => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <input
                                 type="number"
-                                step=".01"
+                                step=".001"
                                 placeholder="0.00"
                                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 {...register("distance", {
