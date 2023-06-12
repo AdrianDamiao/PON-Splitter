@@ -105,14 +105,14 @@ export const Form = () => {
     };
 
     return (
-        <main className="h-full flex flex-col md:flex-row items-center justify-center">
+        <main className="h-full flex flex-col items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col gap-4 w-full max-w-2xl text-left md:pr-8"
+                className="flex flex-col w-full max-w-2xl text-left"
             >
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="mt-10 px-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-6">
-                        <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                        <h5 className="text-left mb-3 text-xl font-semibold text-gray-900 md:text-2xl dark:text-white">
                             Calculo da Rede PON
                         </h5>
                     </div>
@@ -287,20 +287,22 @@ export const Form = () => {
                             <option value="5">1:32</option>
                         </select>
                     </div>
+                    <div className="col-span-6">
+                        <button
+                            type="submit"
+                            className="w-full text-white bg-violet-500 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
+                        >
+                            Calcular
+                        </button>
+                    </div>
                 </div>
-                <button
-                    type="submit"
-                    className="w-full text-white bg-violet-500 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
-                >
-                    Calcular
-                </button>
             </form>
             {distanceResult &&
                 transmissionResult &&
                 receptionResult &&
                 attenuationResult &&
                 splitterResult && (
-                    <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="my-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                             Resultado
                         </h5>
