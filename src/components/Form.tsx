@@ -27,19 +27,28 @@ const calculateFormSchema = z.object({
         invalid_type_error:
             "A Sensibilidade de receptção precisa ser um número",
     }),
+    attenuationConector: z.number({
+        invalid_type_error: "A atenuação precisa ser um número",
+    }),
+    attenuationFusionPoint: z.number({
+        invalid_type_error: "A atenuação precisa ser um número",
+    }),
     splitter: z.string(),
 });
 
 type CalculateFormData = z.infer<typeof calculateFormSchema>;
 
 export const Form = () => {
-    const [answer, setAnswer] = useState<number>();
     const [distanceResult, setDistanceResult] = useState<number>();
     const [transmissionResult, setTransmissionResult] = useState<number>();
     const [receptionResult, setReceptionResult] = useState<number>();
     const [attenuationResult, setAttenuationResult] = useState<number>();
     const [splitterResult, setSplitterResult] = useState<string>();
-    const [selectedUnity, setSelectedUnity] = useState('');
+    const [selectedUnity, setSelectedUnity] = useState("");
+    const [attenuationConectorResult, setAttenuationConectorResult] =
+        useState<number>(0.5);
+    const [attenuationFusionPointResult, setAttenuationFusionPointResult] =
+        useState<number>(0.1);
 
     const {
         register,
@@ -57,6 +66,8 @@ export const Form = () => {
         transmission,
         reception,
         attenuation,
+        attenuationConector,
+        attenuationFusionPoint,
         distance,
         splitter,
     }: CalculateFormData) => {
@@ -64,8 +75,10 @@ export const Form = () => {
             transmissionPower: transmission,
             receptionPower: reception,
             attenuationCoefficient: attenuation,
+            attenuationConector: attenuationConector,
+            attenuationFusionPoint: attenuationFusionPoint,
             distance: selectedUnity === "km" ? distance : distance * 1000,
-            splitter: (Number(splitter)*(-3)).toString(),
+            splitter: (Number(splitter) * -3).toString(),
         };
 
         if (distance == 0) {
@@ -78,22 +91,24 @@ export const Form = () => {
             specs.attenuationCoefficient = CalculateCoefficient(specs);
         }
 
-        setSplitterResult((Number(specs.splitter)/-3).toString());
+        setSplitterResult((Number(specs.splitter) / -3).toString());
         setDistanceResult(specs.distance);
         setTransmissionResult(specs.transmissionPower);
         setReceptionResult(specs.receptionPower);
         setAttenuationResult(specs.attenuationCoefficient);
+        setAttenuationConectorResult(specs.attenuationConector);
+        setAttenuationFusionPointResult(specs.attenuationFusionPoint);
     };
 
     const handleUnityChange = (event) => {
         setSelectedUnity(event.target.value);
-    }
+    };
 
     return (
-        <main className="h-full flex flex-col items-center justify-center">
+        <main className="h-full flex flex-col md:flex-row items-center justify-center">
             <form
                 onSubmit={handleSubmit(calculate)}
-                className="flex flex-col gap-4 w-full max-w-2xl text-left"
+                className="flex flex-col gap-4 w-full max-w-2xl text-left md:pr-8"
             >
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
@@ -130,18 +145,10 @@ export const Form = () => {
                                     valueAsNumber: !isEmpty("attenuation"),
                                 })}
                             />
-                            <div className="absolute inset-y-0 right-0 flex items-center">
-                                <label htmlFor="unidade" className="sr-only">
-                                    Unidade
-                                </label>
-                                <select
-                                    disabled
-                                    id="unidadeAtenuacao"
-                                    name="unidadeAtenuacao"
-                                    className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm"
-                                >
-                                    <option selected value="1">db/km</option>
-                                </select>
+                            <div className="absolute inset-y-1/4 right-0 flex items-center">
+                                <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
+                                    db/km
+                                </span>
                             </div>
                         </div>
                         {errors.attenuation && (
@@ -174,8 +181,8 @@ export const Form = () => {
                                     onChange={handleUnityChange}
                                     value={selectedUnity}
                                 >
-                                    <option value="m">m</option>
                                     <option value="km">km</option>
+                                    <option value="m">m</option>
                                 </select>
                             </div>
                         </div>
@@ -200,6 +207,60 @@ export const Form = () => {
                         </div>
                         {errors.reception && (
                             <span>{errors.reception.message}</span>
+                        )}
+                    </div>
+                    <div className="sm:col-span-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
+                            Atenuação do Conector
+                        </label>
+                        <div className="relative mt-2 rounded-md shadow-sm">
+                            <input
+                                type="number"
+                                step=".01"
+                                placeholder="0.00"
+                                value={attenuationConectorResult}
+                                className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                {...register("attenuationConector", {
+                                    valueAsNumber: !isEmpty(
+                                        "attenuationConector"
+                                    ),
+                                })}
+                            />
+                            <div className="absolute inset-y-1/4 right-0 flex items-center">
+                                <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
+                                    db
+                                </span>
+                            </div>
+                        </div>
+                        {errors.attenuation && (
+                            <span>{errors.attenuation.message}</span>
+                        )}
+                    </div>
+                    <div className="sm:col-span-3">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
+                            Atenuação do ponto de fusão
+                        </label>
+                        <div className="relative mt-2 rounded-md shadow-sm">
+                            <input
+                                type="number"
+                                step=".01"
+                                placeholder="0.00"
+                                value={attenuationFusionPointResult}
+                                className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
+                                {...register("attenuationFusionPoint", {
+                                    valueAsNumber: !isEmpty(
+                                        "attenuationFusionPoint"
+                                    ),
+                                })}
+                            />
+                            <div className="absolute inset-y-1/4 right-0 flex items-center">
+                                <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
+                                    db
+                                </span>
+                            </div>
+                        </div>
+                        {errors.attenuation && (
+                            <span>{errors.attenuation.message}</span>
                         )}
                     </div>
                     <div className="sm:col-span-6 mb-4">
@@ -236,7 +297,7 @@ export const Form = () => {
                 splitterResult && (
                     <div className="mt-10 w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="text-left mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                            Resultado
+                            Resultado da Rede PON
                         </h5>
                         <p className="text-left text-sm font-normal text-gray-500 dark:text-gray-400">
                             Configurações da rede PON.
@@ -255,7 +316,13 @@ export const Form = () => {
                                             Distância
                                         </td>
                                         <td className="border px-6 py-4">
-                                            {Number(distanceResult.toFixed(2)) >= 0 ? `${distanceResult.toFixed(2)} km` : "0 km"}
+                                            {Number(
+                                                distanceResult.toFixed(2)
+                                            ) >= 0
+                                                ? `${distanceResult.toFixed(
+                                                      2
+                                                  )} km`
+                                                : "0 km"}
                                         </td>
                                     </tr>
                                     <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -288,7 +355,51 @@ export const Form = () => {
                                             Atenuação
                                         </th>
                                         <td className="px-6 py-4">
-                                            {Number(attenuationResult.toFixed(2)) >= 0 ? `${attenuationResult.toFixed(2)} dB/km` : "0 dB/km"}
+                                            {Number(
+                                                attenuationResult.toFixed(2)
+                                            ) >= 0
+                                                ? `${attenuationResult.toFixed(
+                                                      2
+                                                  )} dB/km`
+                                                : "0 dB/km"}
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Atenuação do Conector
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {Number(
+                                                attenuationConectorResult.toFixed(
+                                                    2
+                                                )
+                                            ) >= 0
+                                                ? `${attenuationConectorResult.toFixed(
+                                                      2
+                                                  )} dB/km`
+                                                : "0 dB/km"}
+                                        </td>
+                                    </tr>
+                                    <tr className="bg-white border dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th
+                                            scope="row"
+                                            className="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            Atenuação do ponto de fusão
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            {Number(
+                                                attenuationFusionPointResult.toFixed(
+                                                    2
+                                                )
+                                            ) >= 0
+                                                ? `${attenuationFusionPointResult.toFixed(
+                                                      2
+                                                  )} dB/km`
+                                                : "0 dB/km"}
                                         </td>
                                     </tr>
                                 </tbody>
