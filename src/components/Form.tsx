@@ -96,7 +96,7 @@ export const Form = () => {
         setAttenuationFusionPointResult(specs.fusionPointAttenuation);
     };
 
-    const handleUnityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUnityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedUnity(event.target.value);
     };
 
