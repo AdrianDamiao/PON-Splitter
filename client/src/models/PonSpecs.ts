@@ -30,6 +30,6 @@ export default class PonSpecs implements IPonSpecs {
         this.distance = 0;
         this.connectorAttenuation = 0;
         this.fusionPointAttenuation = 0;
-        this.splitter = "";
+        this.splitter = '';
     }
 }

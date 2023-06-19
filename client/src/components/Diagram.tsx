@@ -12,22 +12,22 @@ export const Diagram = ({ splitter }: splitterProps) => {
     let initialNodes;
     let initialEdges;
 
-    if (splitter == "0") {
+    if (splitter == '0') {
         initialNodes = splitterNodes[0];
         initialEdges = splitterEdges[0];
-    } else if (splitter == "1") {
+    } else if (splitter == '1') {
         initialNodes = splitterNodes[1];
         initialEdges = splitterEdges[1];
-    } else if (splitter == "2") {
+    } else if (splitter == '2') {
         initialNodes = splitterNodes[2];
         initialEdges = splitterEdges[2];
-    } else if (splitter == "3") {
+    } else if (splitter == '3') {
         initialNodes = splitterNodes[3];
         initialEdges = splitterEdges[3];
-    } else if (splitter == "4") {
+    } else if (splitter == '4') {
         initialNodes = splitterNodes[4];
         initialEdges = splitterEdges[4];
-    } else if (splitter == "5") {
+    } else if (splitter == '5') {
         initialNodes = splitterNodes[5];
         initialEdges = splitterEdges[5];
     }

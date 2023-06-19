@@ -4,7 +4,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Diagram } from "./Diagram";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import CalculatedResource from "../utils/CalculatedResource";
 const api = axios.create({ baseURL: 'http://localhost:5181/api/' });
 
 const calculateFormSchema = z.object({
@@ -37,6 +38,11 @@ export const Form = () => {
   const [selectedUnity, setSelectedUnity] = useState("km");
   const [attenuationConectorResult, setAttenuationConectorResult] = useState<number>(0.5);
   const [attenuationFusionPointResult, setAttenuationFusionPointResult] = useState<number>(0.1);
+  
+  const [attenuation, setAttenuation] = useState<number>();
+  const [distance, setDistance] = useState<number>();
+  const [receptionPower, setReceptionPower] = useState<number>();
+  const [transmissionPower, setTransmissionPower] = useState<number>();
 
   const { register, handleSubmit, formState: { errors } } = useForm<CalculateFormData>({
     resolver: zodResolver(calculateFormSchema),
@@ -65,22 +71,56 @@ export const Form = () => {
       splitter,
     };
 
-    console.log('oi');
-    api.post('calcs/calculate', specs);
+    console.log(specs);
+    
+    api.post('calcs/calculate', specs)
+    .then((response: AxiosResponse<{resource: number, result: number}>) => {
+      switch(response.data.resource) {
+        case CalculatedResource.AttenuationCoefficient: specs.attenuationCoefficient = response.data.result; break;
+        case CalculatedResource.Distance: specs.distance = response.data.result; break;
+        case CalculatedResource.ReceptionPower: specs.receptionPower = response.data.result; break;
+        case CalculatedResource.TransmissionPower: specs.transmissionPower = response.data.result; break;
+      }
+        
+      console.log('4', attenuationResult);
+      console.log('1', distanceResult);
+      console.log('3', receptionResult);
+      console.log('2', transmissionResult);
+      
+        setAttenuation(specs.attenuationCoefficient);
+        setDistance(specs.distance);
+        setReceptionPower(specs.receptionPower);
+        setTransmissionPower(specs.transmissionPower);
 
-    setSplitterResult((Number(specs.splitter) / -3).toString());
-    setDistanceResult(specs.distance);
-    setTransmissionResult(specs.transmissionPower);
-    setReceptionResult(specs.receptionPower);
-    setAttenuationResult(specs.attenuationCoefficient);
-    setAttenuationConectorResult(specs.connectorAttenuation);
-    setAttenuationFusionPointResult(specs.fusionPointAttenuation);
+        setSplitterResult(specs.splitter.toString());
+        setAttenuationResult(specs.attenuationCoefficient);
+        setDistanceResult(specs.distance);
+        setReceptionResult(specs.receptionPower);
+        setTransmissionResult(specs.transmissionPower);
+        setAttenuationConectorResult(specs.connectorAttenuation);
+        setAttenuationFusionPointResult(specs.fusionPointAttenuation);
+      });
   };
 
   const handleUnityChange = (event) => {
     setSelectedUnity(event.target.value);
   };
 
+  const handleAttenuationChange = (event) => {
+    setAttenuation(event.target.value);
+  }
+  
+  const handleDistanceChange = (event) => {
+    setDistance(event.target.value);
+  }
+
+  const handleReceptionPowerChange = (event) => {
+    setReceptionPower(event.target.value);
+  }
+
+  const handleTransmissionPowerChange = (event) => {
+    setTransmissionPower(event.target.value);
+  }
   return (
     <main className="h-full flex flex-col md:flex-row-reverse items-center justify-center">
       {distanceResult &&
@@ -201,10 +241,12 @@ export const Form = () => {
                 type="number"
                 step=".01"
                 placeholder="0.00"
+                value={transmissionPower}
                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 {...register("transmission", {
                   valueAsNumber: !isEmpty("transmission"),
                 })}
+                onChange={handleTransmissionPowerChange}
               />
             </div>
             {errors.transmission && (
@@ -221,10 +263,12 @@ export const Form = () => {
                 type="number"
                 step=".01"
                 placeholder="0.00"
+                value={attenuation}
                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                 {...register("attenuation", {
                   valueAsNumber: !isEmpty("attenuation"),
                 })}
+                onChange={handleAttenuationChange}
               />
               <div className="absolute inset-y-1/4 right-0 flex items-center">
                 <span className="h-full py-0 pl-2 pr-4 text-gray-500 sm:text-sm">
@@ -245,10 +289,12 @@ export const Form = () => {
                 type="number"
                 step=".001"
                 placeholder="0.00"
+                value={distance}
                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 {...register("distance", {
                   valueAsNumber: !isEmpty("distance"),
                 })}
+                onChange={handleDistanceChange}
               />
 
               <div className="absolute inset-y-0 right-0 flex items-center">
@@ -280,10 +326,12 @@ export const Form = () => {
                 type="number"
                 step=".01"
                 placeholder="0.00"
+                value={receptionPower}
                 className="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6"
                 {...register("reception", {
                   valueAsNumber: !isEmpty("reception"),
                 })}
+                onChange={handleReceptionPowerChange}
               />
             </div>
             {errors.reception && (
@@ -355,12 +403,12 @@ export const Form = () => {
               <option value="" disabled>
                 Selecione um splitter
               </option>
-              <option value={0}>Sem Splitter</option>
-              <option value={1}>1:2</option>
-              <option value={2}>1:4</option>
-              <option value={3}>1:8</option>
-              <option value={4}>1:16</option>
-              <option value={5}>1:32</option>
+              <option value="0">Sem Splitter</option>
+              <option value="1">1:2</option>
+              <option value="2">1:4</option>
+              <option value="3">1:8</option>
+              <option value="4">1:16</option>
+              <option value="5">1:32</option>
             </select>
           </div>
           <div className="col-span-6">
