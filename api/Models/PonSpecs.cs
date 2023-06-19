@@ -1,3 +1,5 @@
+using PonSpecsCalculator.Enums;
+
 namespace PonSpecsCalculator.Models
 {
     public class PonSpecs

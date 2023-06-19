@@ -4,29 +4,25 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Diagram } from "./Diagram";
-import PONCalculator from "../utils/PONCalculator";
+import axios from "axios";
+const api = axios.create({ baseURL: 'http://localhost:5181/api/' });
 
 const calculateFormSchema = z.object({
-  transmission: z.number({
-    invalid_type_error: "A potência de transmissão precisa ser um número",
-  }),
-  attenuation: z.number({
-    invalid_type_error: "A atenuação precisa ser um número",
-  }),
+  transmission: z
+    .number({ invalid_type_error: "A potência de transmissão precisa ser um número" })
+    .or(z.nan()),
+  attenuation: z
+    .number({ invalid_type_error: "A atenuação precisa ser um número" })
+    .or(z.nan()),
   distance: z
-    .number({
-      invalid_type_error: "A distância precisa ser um número",
-    })
-    .nonnegative({ message: "A distância precisa ser maior ou igual a 1" }),
-  reception: z.number({
-    invalid_type_error: "A Sensibilidade de recepção precisa ser um número",
-  }),
-  attenuationConector: z.number({
-    invalid_type_error: "A atenuação precisa ser um número",
-  }),
-  attenuationFusionPoint: z.number({
-    invalid_type_error: "A atenuação precisa ser um número",
-  }),
+    .number({ invalid_type_error: "A distância precisa ser um número" })
+    .nonnegative({ message: "A distância precisa ser maior ou igual a 1" })
+    .or(z.nan()),
+  reception: z
+    .number({ invalid_type_error: "A Sensibilidade de recepção precisa ser um número" })
+    .or(z.nan()),
+  attenuationConector: z.number({ invalid_type_error: "A atenuação precisa ser um número" }),
+  attenuationFusionPoint: z.number({ invalid_type_error: "A atenuação precisa ser um número" }),
   splitter: z.string(),
 });
 
@@ -66,18 +62,11 @@ export const Form = () => {
       connectorAttenuation: attenuationConector,
       fusionPointAttenuation: attenuationFusionPoint,
       distance: selectedUnity === "km" ? distance : (distance / 1000),
-      splitter: (Number(splitter) * -3).toString(),
+      splitter,
     };
 
-    if (distance == 0) {
-      specs.distance = PONCalculator.CalculateDistance(specs);
-    } else if (transmission == 0) {
-      specs.transmissionPower = PONCalculator.CalculateTransmissionPower(specs);
-    } else if (reception == 0) {
-      specs.receptionPower = PONCalculator.CalculateReception(specs);
-    } else if (attenuation == 0) {
-      specs.attenuationCoefficient = PONCalculator.CalculateCoefficient(specs);
-    }
+    console.log('oi');
+    api.post('calcs/calculate', specs);
 
     setSplitterResult((Number(specs.splitter) / -3).toString());
     setDistanceResult(specs.distance);
@@ -256,7 +245,6 @@ export const Form = () => {
                 type="number"
                 step=".001"
                 placeholder="0.00"
-                defaultValue={0}
                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 {...register("distance", {
                   valueAsNumber: !isEmpty("distance"),
@@ -367,12 +355,12 @@ export const Form = () => {
               <option value="" disabled>
                 Selecione um splitter
               </option>
-              <option value="0">Sem Splitter</option>
-              <option value="1">1:2</option>
-              <option value="2">1:4</option>
-              <option value="3">1:8</option>
-              <option value="4">1:16</option>
-              <option value="5">1:32</option>
+              <option value={0}>Sem Splitter</option>
+              <option value={1}>1:2</option>
+              <option value={2}>1:4</option>
+              <option value={3}>1:8</option>
+              <option value={4}>1:16</option>
+              <option value={5}>1:32</option>
             </select>
           </div>
           <div className="col-span-6">

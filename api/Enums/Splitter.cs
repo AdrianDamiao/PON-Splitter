@@ -1,4 +1,4 @@
-namespace PonSpecsCalculator.Models
+namespace PonSpecsCalculator.Enums
 {
     public enum Splitter
     {

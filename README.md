@@ -8,5 +8,5 @@
 - [ ] Adicionar diagrama de classe
 - [x] Adicionar orientação a objeto
 - [ ] Revisar responsividade
-- [ ] Refatorar o código -- Damiao
+- [x] Refatorar o código -- Damiao
 - [x] Mover coordernadas do diagrama para um arquivo separado

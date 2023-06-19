@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PonSpecsCalculator.Enums;
 using PonSpecsCalculator.Models;
 
 namespace PonSpecsCalculator.Controllers
@@ -17,19 +18,19 @@ namespace PonSpecsCalculator.Controllers
         {
             if(inputSpecs.Distance == null)
             {
-                return Ok(inputSpecs.CalculateDistance()!.Value);
+                return Ok(new { Resource = CalculatedResource.Distance, Result = inputSpecs.CalculateDistance()!.Value });
             }
             else if(inputSpecs.TransmissionPower == null)
             {
-                return Ok(inputSpecs.CalculateTransmissionPower()!.Value);
+                return Ok(new { Resource = CalculatedResource.TransmissionPower, Result = inputSpecs.CalculateTransmissionPower()!.Value });
             }
             else if(inputSpecs.ReceptionPower == null)
             {
-                return Ok(inputSpecs.CalculateReceptionPower()!.Value);
+                return Ok(new { Resource = CalculatedResource.ReceptionPower, Result = inputSpecs.CalculateReceptionPower()!.Value });
             } 
             else if(inputSpecs.AttenuationCoefficient == null)
             {
-                return Ok(inputSpecs.CalculateCoefficient()!.Value);
+                return Ok(new { Resource = CalculatedResource.AttenuationCoefficient, Result = inputSpecs.CalculateCoefficient()!.Value });
             }
             else
             {
