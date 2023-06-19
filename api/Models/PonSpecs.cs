@@ -1,54 +1,35 @@
-using System;
-
 namespace PonSpecsCalculator.Models
 {
     public class PonSpecs
     {
-        public long? TransmissionPower = 0;
-        public long? AttenuationCoefficient = 0;
-        public long? ReceptionPower = 0;
-        public long? ConnectorAttenuation = 0;
-        public long? FusionPointAttenuation = 0;
-        public long? Distance = 0;
+        public double? TransmissionPower { get; set; }
+        public double? AttenuationCoefficient { get; set; }
+        public double? ReceptionPower { get; set; }
+        public double? ConnectorAttenuation { get; set; }
+        public double? FusionPointAttenuation { get; set; }
+        public double? Distance { get; set; }
         public Splitter Splitter = Splitter.None;
 
-        private long SplitterAttenuation { get => (int)Splitter * (-3); }
-        private long? ConnectorsAttenuation { get => CalculateConnectorsAttenuation(); }
-
-        private long? CalculateDistance()
-            => (((ReceptionPower - SplitterAttenuation) - TransmissionPower) + ConnectorsAttenuation) / (AttenuationCoefficient * (-1));
-
-        private long? CalculateTransmissionPower()
-            => (ReceptionPower - SplitterAttenuation) + ((Distance * AttenuationCoefficient) + ConnectorsAttenuation);
-
-        private long? CalculateReceptionPower()
-            => (TransmissionPower - ((Distance * AttenuationCoefficient) + ConnectorsAttenuation)) - SplitterAttenuation;
-
-        private long? CalculateCoefficient()
-            => (((ReceptionPower - SplitterAttenuation) - TransmissionPower) + ConnectorsAttenuation) / (Distance * (-1));
-        
-        public long CalculateEmptyVariable() {
-            if(Distance == null)
-            {
-                return CalculateDistance()!.Value;
-            }
-            else if(TransmissionPower == null)
-            {
-                return CalculateTransmissionPower()!.Value;
-            }
-            else if(ReceptionPower == null)
-            {
-                return CalculateReceptionPower()!.Value;
-            } 
-            else if(CalculateCoefficient == null)
-            {
-                return CalculateDistance()!.Value;
-            }
-            
-            throw new InvalidOperationException("Você não pode preencher todos os campos.");
+        public PonSpecs()
+        {
         }
 
-        private long? CalculateConnectorsAttenuation()
+        private double SplitterAttenuation { get => (int)Splitter * (-3); }
+        private double? ConnectorsAttenuation { get => CalculateConnectorsAttenuation(); }
+
+        public double? CalculateDistance()
+            => (((ReceptionPower - SplitterAttenuation) - TransmissionPower) + ConnectorsAttenuation) / (AttenuationCoefficient * (-1));
+
+        public double? CalculateTransmissionPower()
+            => (ReceptionPower - SplitterAttenuation) + ((Distance * AttenuationCoefficient) + ConnectorsAttenuation);
+
+        public double? CalculateReceptionPower()
+            => (TransmissionPower - ((Distance * AttenuationCoefficient) + ConnectorsAttenuation)) - SplitterAttenuation;
+
+        public double? CalculateCoefficient()
+            => (((ReceptionPower - SplitterAttenuation) - TransmissionPower) + ConnectorsAttenuation) / (Distance * (-1));
+
+        private double? CalculateConnectorsAttenuation()
             => Splitter switch {
                 Splitter.None => ConnectorAttenuation * 2 + (FusionPointAttenuation * 2),
                 Splitter.OneForTwo => ConnectorAttenuation * 3 + (FusionPointAttenuation * 2),

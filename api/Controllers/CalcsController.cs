@@ -15,7 +15,26 @@ namespace PonSpecsCalculator.Controllers
         [Route("calculate")]
         public IActionResult CalculatePonSpecs(PonSpecs inputSpecs)
         {
-            return Ok(inputSpecs.CalculateEmptyVariable());
+            if(inputSpecs.Distance == null)
+            {
+                return Ok(inputSpecs.CalculateDistance()!.Value);
+            }
+            else if(inputSpecs.TransmissionPower == null)
+            {
+                return Ok(inputSpecs.CalculateTransmissionPower()!.Value);
+            }
+            else if(inputSpecs.ReceptionPower == null)
+            {
+                return Ok(inputSpecs.CalculateReceptionPower()!.Value);
+            } 
+            else if(inputSpecs.AttenuationCoefficient == null)
+            {
+                return Ok(inputSpecs.CalculateCoefficient()!.Value);
+            }
+            else
+            {
+                return BadRequest("Você precisa deixar um dos dados vazios.");
+            }
         }
     }
 }
