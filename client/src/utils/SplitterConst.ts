@@ -33,7 +33,7 @@ export const splitterNodes = [
         },
         {
             id: "3",
-            position: { x: 500, y: 100 },
+            position: { x: 600, y: 100 },
             data: { label: "ONT 1" },
             sourcePosition: "right",
             type: "output",
@@ -42,7 +42,7 @@ export const splitterNodes = [
 
         {
             id: "4",
-            position: { x: 500, y: -100 },
+            position: { x: 600, y: -100 },
             data: { label: "ONT 2" },
             sourcePosition: "right",
             type: "output",
@@ -66,7 +66,7 @@ export const splitterNodes = [
         },
         {
             id: "3",
-            position: { x: 500, y: -150 },
+            position: { x: 600, y: -150 },
             data: { label: "ONT 1" },
             sourcePosition: "right",
             type: "output",
@@ -75,7 +75,7 @@ export const splitterNodes = [
 
         {
             id: "4",
-            position: { x: 500, y: -50 },
+            position: { x: 600, y: -50 },
             data: { label: "ONT 2" },
             sourcePosition: "right",
             type: "output",
@@ -84,7 +84,7 @@ export const splitterNodes = [
 
         {
             id: "5",
-            position: { x: 500, y: 50 },
+            position: { x: 600, y: 50 },
             data: { label: "ONT 3" },
             sourcePosition: "right",
             type: "output",
@@ -92,7 +92,7 @@ export const splitterNodes = [
         },
         {
             id: "6",
-            position: { x: 500, y: 150 },
+            position: { x: 600, y: 150 },
             data: { label: "ONT 4" },
             sourcePosition: "right",
             type: "output",
@@ -116,7 +116,7 @@ export const splitterNodes = [
         },
         {
             id: "3",
-            position: { x: 500, y: -200 },
+            position: { x: 600, y: -200 },
             data: { label: "ONT 1" },
             sourcePosition: "right",
             type: "output",
@@ -125,7 +125,7 @@ export const splitterNodes = [
 
         {
             id: "4",
-            position: { x: 500, y: -150 },
+            position: { x: 600, y: -150 },
             data: { label: "ONT 2" },
             sourcePosition: "right",
             type: "output",
@@ -134,7 +134,7 @@ export const splitterNodes = [
 
         {
             id: "5",
-            position: { x: 500, y: -100 },
+            position: { x: 600, y: -100 },
             data: { label: "ONT 3" },
             sourcePosition: "right",
             type: "output",
@@ -142,7 +142,7 @@ export const splitterNodes = [
         },
         {
             id: "6",
-            position: { x: 500, y: -50 },
+            position: { x: 600, y: -50 },
             data: { label: "ONT 4" },
             sourcePosition: "right",
             type: "output",
@@ -150,7 +150,7 @@ export const splitterNodes = [
         },
         {
             id: "7",
-            position: { x: 500, y: 0 },
+            position: { x: 600, y: 0 },
             data: { label: "ONT 5" },
             sourcePosition: "right",
             type: "output",
@@ -159,7 +159,7 @@ export const splitterNodes = [
 
         {
             id: "8",
-            position: { x: 500, y: 50 },
+            position: { x: 600, y: 50 },
             data: { label: "ONT 6" },
             sourcePosition: "right",
             type: "output",
@@ -168,7 +168,7 @@ export const splitterNodes = [
 
         {
             id: "9",
-            position: { x: 500, y: 100 },
+            position: { x: 600, y: 100 },
             data: { label: "ONT 7" },
             sourcePosition: "right",
             type: "output",
@@ -176,7 +176,7 @@ export const splitterNodes = [
         },
         {
             id: "10",
-            position: { x: 500, y: 150 },
+            position: { x: 600, y: 150 },
             data: { label: "ONT 8" },
             sourcePosition: "right",
             type: "output",
@@ -200,7 +200,7 @@ export const splitterNodes = [
         },
         {
             id: "3",
-            position: { x: 500, y: -400 },
+            position: { x: 600, y: -400 },
             data: { label: "ONT 1" },
             sourcePosition: "right",
             type: "output",
@@ -209,7 +209,7 @@ export const splitterNodes = [
 
         {
             id: "4",
-            position: { x: 500, y: -350 },
+            position: { x: 600, y: -350 },
             data: { label: "ONT 2" },
             sourcePosition: "right",
             type: "output",
@@ -218,7 +218,7 @@ export const splitterNodes = [
 
         {
             id: "5",
-            position: { x: 500, y: -300 },
+            position: { x: 600, y: -300 },
             data: { label: "ONT 3" },
             sourcePosition: "right",
             type: "output",
@@ -226,7 +226,7 @@ export const splitterNodes = [
         },
         {
             id: "6",
-            position: { x: 500, y: -250 },
+            position: { x: 600, y: -250 },
             data: { label: "ONT 4" },
             sourcePosition: "right",
             type: "output",
@@ -234,7 +234,7 @@ export const splitterNodes = [
         },
         {
             id: "7",
-            position: { x: 500, y: -200 },
+            position: { x: 600, y: -200 },
             data: { label: "ONT 5" },
             sourcePosition: "right",
             type: "output",
@@ -243,7 +243,7 @@ export const splitterNodes = [
 
         {
             id: "8",
-            position: { x: 500, y: -150 },
+            position: { x: 600, y: -150 },
             data: { label: "ONT 6" },
             sourcePosition: "right",
             type: "output",
@@ -252,7 +252,7 @@ export const splitterNodes = [
 
         {
             id: "9",
-            position: { x: 500, y: -100 },
+            position: { x: 600, y: -100 },
             data: { label: "ONT 7" },
             sourcePosition: "right",
             type: "output",
@@ -260,7 +260,7 @@ export const splitterNodes = [
         },
         {
             id: "10",
-            position: { x: 500, y: -50 },
+            position: { x: 600, y: -50 },
             data: { label: "ONT 8" },
             sourcePosition: "right",
             type: "output",
@@ -268,7 +268,7 @@ export const splitterNodes = [
         },
         {
             id: "11",
-            position: { x: 500, y: 0 },
+            position: { x: 600, y: 0 },
             data: { label: "ONT 9" },
             sourcePosition: "right",
             type: "output",
@@ -277,7 +277,7 @@ export const splitterNodes = [
 
         {
             id: "12",
-            position: { x: 500, y: 50 },
+            position: { x: 600, y: 50 },
             data: { label: "ONT 10" },
             sourcePosition: "right",
             type: "output",
@@ -286,7 +286,7 @@ export const splitterNodes = [
 
         {
             id: "13",
-            position: { x: 500, y: 100 },
+            position: { x: 600, y: 100 },
             data: { label: "ONT 11" },
             sourcePosition: "right",
             type: "output",
@@ -294,7 +294,7 @@ export const splitterNodes = [
         },
         {
             id: "14",
-            position: { x: 500, y: 150 },
+            position: { x: 600, y: 150 },
             data: { label: "ONT 12" },
             sourcePosition: "right",
             type: "output",
@@ -302,7 +302,7 @@ export const splitterNodes = [
         },
         {
             id: "15",
-            position: { x: 500, y: 200 },
+            position: { x: 600, y: 200 },
             data: { label: "ONT 13" },
             sourcePosition: "right",
             type: "output",
@@ -311,7 +311,7 @@ export const splitterNodes = [
 
         {
             id: "16",
-            position: { x: 500, y: 250 },
+            position: { x: 600, y: 250 },
             data: { label: "ONT 14" },
             sourcePosition: "right",
             type: "output",
@@ -320,7 +320,7 @@ export const splitterNodes = [
 
         {
             id: "17",
-            position: { x: 500, y: 300 },
+            position: { x: 600, y: 300 },
             data: { label: "ONT 15" },
             sourcePosition: "right",
             type: "output",
@@ -328,7 +328,7 @@ export const splitterNodes = [
         },
         {
             id: "18",
-            position: { x: 500, y: 350 },
+            position: { x: 600, y: 350 },
             data: { label: "ONT 16" },
             sourcePosition: "right",
             type: "output",
@@ -352,7 +352,7 @@ export const splitterNodes = [
         },
         {
             id: "3",
-            position: { x: 500, y: -800 },
+            position: { x: 600, y: -800 },
             data: { label: "ONT 1" },
             sourcePosition: "right",
             type: "output",
@@ -361,7 +361,7 @@ export const splitterNodes = [
 
         {
             id: "4",
-            position: { x: 500, y: -750 },
+            position: { x: 600, y: -750 },
             data: { label: "ONT 2" },
             sourcePosition: "right",
             type: "output",
@@ -370,7 +370,7 @@ export const splitterNodes = [
 
         {
             id: "5",
-            position: { x: 500, y: -700 },
+            position: { x: 600, y: -700 },
             data: { label: "ONT 3" },
             sourcePosition: "right",
             type: "output",
@@ -378,7 +378,7 @@ export const splitterNodes = [
         },
         {
             id: "6",
-            position: { x: 500, y: -650 },
+            position: { x: 600, y: -650 },
             data: { label: "ONT 4" },
             sourcePosition: "right",
             type: "output",
@@ -386,7 +386,7 @@ export const splitterNodes = [
         },
         {
             id: "7",
-            position: { x: 500, y: -600 },
+            position: { x: 600, y: -600 },
             data: { label: "ONT 5" },
             sourcePosition: "right",
             type: "output",
@@ -395,7 +395,7 @@ export const splitterNodes = [
 
         {
             id: "8",
-            position: { x: 500, y: -550 },
+            position: { x: 600, y: -550 },
             data: { label: "ONT 6" },
             sourcePosition: "right",
             type: "output",
@@ -404,7 +404,7 @@ export const splitterNodes = [
 
         {
             id: "9",
-            position: { x: 500, y: -500 },
+            position: { x: 600, y: -500 },
             data: { label: "ONT 7" },
             sourcePosition: "right",
             type: "output",
@@ -412,7 +412,7 @@ export const splitterNodes = [
         },
         {
             id: "10",
-            position: { x: 500, y: -450 },
+            position: { x: 600, y: -450 },
             data: { label: "ONT 8" },
             sourcePosition: "right",
             type: "output",
@@ -420,7 +420,7 @@ export const splitterNodes = [
         },
         {
             id: "11",
-            position: { x: 500, y: -400 },
+            position: { x: 600, y: -400 },
             data: { label: "ONT 9" },
             sourcePosition: "right",
             type: "output",
@@ -429,7 +429,7 @@ export const splitterNodes = [
 
         {
             id: "12",
-            position: { x: 500, y: -350 },
+            position: { x: 600, y: -350 },
             data: { label: "ONT 10" },
             sourcePosition: "right",
             type: "output",
@@ -438,7 +438,7 @@ export const splitterNodes = [
 
         {
             id: "13",
-            position: { x: 500, y: -300 },
+            position: { x: 600, y: -300 },
             data: { label: "ONT 11" },
             sourcePosition: "right",
             type: "output",
@@ -446,7 +446,7 @@ export const splitterNodes = [
         },
         {
             id: "14",
-            position: { x: 500, y: -250 },
+            position: { x: 600, y: -250 },
             data: { label: "ONT 12" },
             sourcePosition: "right",
             type: "output",
@@ -454,7 +454,7 @@ export const splitterNodes = [
         },
         {
             id: "15",
-            position: { x: 500, y: -200 },
+            position: { x: 600, y: -200 },
             data: { label: "ONT 13" },
             sourcePosition: "right",
             type: "output",
@@ -463,7 +463,7 @@ export const splitterNodes = [
 
         {
             id: "16",
-            position: { x: 500, y: -150 },
+            position: { x: 600, y: -150 },
             data: { label: "ONT 14" },
             sourcePosition: "right",
             type: "output",
@@ -472,7 +472,7 @@ export const splitterNodes = [
 
         {
             id: "17",
-            position: { x: 500, y: -100 },
+            position: { x: 600, y: -100 },
             data: { label: "ONT 15" },
             sourcePosition: "right",
             type: "output",
@@ -480,7 +480,7 @@ export const splitterNodes = [
         },
         {
             id: "18",
-            position: { x: 500, y: -50 },
+            position: { x: 600, y: -50 },
             data: { label: "ONT 16" },
             sourcePosition: "right",
             type: "output",
@@ -488,7 +488,7 @@ export const splitterNodes = [
         },
         {
             id: "19",
-            position: { x: 500, y: 0 },
+            position: { x: 600, y: 0 },
             data: { label: "ONT 17" },
             sourcePosition: "right",
             type: "output",
@@ -497,7 +497,7 @@ export const splitterNodes = [
 
         {
             id: "20",
-            position: { x: 500, y: 50 },
+            position: { x: 600, y: 50 },
             data: { label: "ONT 18" },
             sourcePosition: "right",
             type: "output",
@@ -506,7 +506,7 @@ export const splitterNodes = [
 
         {
             id: "21",
-            position: { x: 500, y: 100 },
+            position: { x: 600, y: 100 },
             data: { label: "ONT 19" },
             sourcePosition: "right",
             type: "output",
@@ -514,7 +514,7 @@ export const splitterNodes = [
         },
         {
             id: "22",
-            position: { x: 500, y: 150 },
+            position: { x: 600, y: 150 },
             data: { label: "ONT 20" },
             sourcePosition: "right",
             type: "output",
@@ -522,7 +522,7 @@ export const splitterNodes = [
         },
         {
             id: "23",
-            position: { x: 500, y: 200 },
+            position: { x: 600, y: 200 },
             data: { label: "ONT 21" },
             sourcePosition: "right",
             type: "output",
@@ -531,7 +531,7 @@ export const splitterNodes = [
 
         {
             id: "24",
-            position: { x: 500, y: 250 },
+            position: { x: 600, y: 250 },
             data: { label: "ONT 22" },
             sourcePosition: "right",
             type: "output",
@@ -540,7 +540,7 @@ export const splitterNodes = [
 
         {
             id: "25",
-            position: { x: 500, y: 300 },
+            position: { x: 600, y: 300 },
             data: { label: "ONT 23" },
             sourcePosition: "right",
             type: "output",
@@ -548,7 +548,7 @@ export const splitterNodes = [
         },
         {
             id: "26",
-            position: { x: 500, y: 350 },
+            position: { x: 600, y: 350 },
             data: { label: "ONT 24" },
             sourcePosition: "right",
             type: "output",
@@ -556,7 +556,7 @@ export const splitterNodes = [
         },
         {
             id: "27",
-            position: { x: 500, y: 400 },
+            position: { x: 600, y: 400 },
             data: { label: "ONT 25" },
             sourcePosition: "right",
             type: "output",
@@ -565,7 +565,7 @@ export const splitterNodes = [
 
         {
             id: "28",
-            position: { x: 500, y: 450 },
+            position: { x: 600, y: 450 },
             data: { label: "ONT 26" },
             sourcePosition: "right",
             type: "output",
@@ -574,7 +574,7 @@ export const splitterNodes = [
 
         {
             id: "29",
-            position: { x: 500, y: 500 },
+            position: { x: 600, y: 500 },
             data: { label: "ONT 27" },
             sourcePosition: "right",
             type: "output",
@@ -582,7 +582,7 @@ export const splitterNodes = [
         },
         {
             id: "30",
-            position: { x: 500, y: 550 },
+            position: { x: 600, y: 550 },
             data: { label: "ONT 28" },
             sourcePosition: "right",
             type: "output",
@@ -590,7 +590,7 @@ export const splitterNodes = [
         },
         {
             id: "31",
-            position: { x: 500, y: 600 },
+            position: { x: 600, y: 600 },
             data: { label: "ONT 29" },
             sourcePosition: "right",
             type: "output",
@@ -599,7 +599,7 @@ export const splitterNodes = [
 
         {
             id: "32",
-            position: { x: 500, y: 650 },
+            position: { x: 600, y: 650 },
             data: { label: "ONT 30" },
             sourcePosition: "right",
             type: "output",
@@ -608,7 +608,7 @@ export const splitterNodes = [
 
         {
             id: "33",
-            position: { x: 500, y: 700 },
+            position: { x: 600, y: 700 },
             data: { label: "ONT 31" },
             sourcePosition: "right",
             type: "output",
@@ -616,7 +616,7 @@ export const splitterNodes = [
         },
         {
             id: "34",
-            position: { x: 500, y: 750 },
+            position: { x: 600, y: 750 },
             data: { label: "ONT 32" },
             sourcePosition: "right",
             type: "output",
