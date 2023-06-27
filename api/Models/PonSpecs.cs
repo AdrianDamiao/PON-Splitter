@@ -10,7 +10,7 @@ namespace PonSpecsCalculator.Models
         public double? ConnectorAttenuation { get; set; }
         public double? FusionPointAttenuation { get; set; }
         public double? Distance { get; set; }
-        public Splitter Splitter = Splitter.None;
+        public Splitter Splitter { get; set; }
 
         public PonSpecs()
         {

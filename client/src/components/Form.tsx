@@ -211,17 +211,22 @@ export const Form = ({ calculate, calculateFormSchema }: any) => {
                         </label>
                         <select
                             className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violet-600 sm:text-sm sm:leading-6 outline-none"
-                            {...register("splitter")}
+                            // {...register("splitter")}
+                            {...register("splitter", {
+                                valueAsNumber: !isEmpty(
+                                    "splitter"
+                                ),
+                            })}
                         >
                             <option value="" disabled>
                                 Selecione um splitter
                             </option>
-                            <option value="0">Sem Splitter</option>
-                            <option value="1">1:2</option>
-                            <option value="2">1:4</option>
-                            <option value="3">1:8</option>
-                            <option value="4">1:16</option>
-                            <option value="5">1:32</option>
+                            <option value={0}>Sem Splitter</option>
+                            <option value={1}>1:2</option>
+                            <option value={2}>1:4</option>
+                            <option value={3}>1:8</option>
+                            <option value={4}>1:16</option>
+                            <option value={5}>1:32</option>
                         </select>
                     </div>
                     <div className="col-span-6 mb-4">

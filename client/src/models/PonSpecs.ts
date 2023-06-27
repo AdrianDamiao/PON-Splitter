@@ -5,7 +5,7 @@ export default interface IPonSpecs {
     connectorAttenuation: number;
     fusionPointAttenuation: number;
     distance: number;
-    splitter: string;
+    splitter: number;
 }
 
 export default class PonSpecs implements IPonSpecs {
@@ -21,7 +21,7 @@ export default class PonSpecs implements IPonSpecs {
 
     public distance: number;
 
-    public splitter: string;
+    public splitter: number;
 
     constructor() {
         this.transmissionPower = 0;
@@ -30,6 +30,6 @@ export default class PonSpecs implements IPonSpecs {
         this.distance = 0;
         this.connectorAttenuation = 0;
         this.fusionPointAttenuation = 0;
-        this.splitter = '';
+        this.splitter = 0;
     }
 }

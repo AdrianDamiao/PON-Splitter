@@ -41,7 +41,7 @@ const calculateFormSchema = z
             invalid_type_error: "A atenuação precisa ser um número",
         }),
         distanceUnit: z.string(),
-        splitter: z.string(),
+        splitter: z.number(),
     })
     .partial()
     .superRefine((val, ctx) => {
