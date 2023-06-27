@@ -2,22 +2,10 @@ import IPonSpecs from "../models/PonSpecs";
 import { z } from "zod";
 import { useState } from "react";
 import { Result } from "./Result";
-import PONCalculator from "../utils/PONCalculator";
 import axios, { AxiosResponse } from "axios";
 import CalculatedResource from "../utils/CalculatedResource";
 const api = axios.create({ baseURL: "http://localhost:5181/api/" });
 import { Form } from "./Form";
-
-function validateInput(props: any) {
-    const EmptyFields: number = Object.values(props).reduce(
-        (total: number, x) => (Number.isNaN(x) ? total + 1 : total),
-        0
-    ) as number;
-    console.log(
-        "Campos Vazios:" + EmptyFields + " " + (EmptyFields > 1 ? true : false)
-    );
-    return EmptyFields > 1 ? false : true;
-}
 
 const calculateFormSchema = z
     .object({
