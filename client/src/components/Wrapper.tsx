@@ -13,8 +13,10 @@ function validateInput(props: any) {
         (total: number, x) => (Number.isNaN(x) ? total + 1 : total),
         0
     ) as number;
-    console.log("Campos Vazios:" + EmptyFields);
-    return EmptyFields > 1 ? true : false;
+    console.log(
+        "Campos Vazios:" + EmptyFields + " " + (EmptyFields > 1 ? true : false)
+    );
+    return EmptyFields > 1 ? false : true;
 }
 
 const calculateFormSchema = z
@@ -53,7 +55,27 @@ const calculateFormSchema = z
         distanceUnit: z.string(),
         splitter: z.string(),
     })
-    .partial();
+    .partial()
+    .superRefine((val, ctx) => {
+        const EmptyFields: number = Object.values(val).reduce(
+            (total: number, x) => (Number.isNaN(x) ? total + 1 : total),
+            0
+        ) as number;
+
+        if (EmptyFields > 1) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `Apenas um campo pode ficar em branco`,
+                path: ["fieldNumber"],
+            });
+        } else if (EmptyFields == 0) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `Para o cálculo um campo precisa ficar em branco`,
+                path: ["fieldNumber"],
+            });
+        }
+    });
 
 type CalculateFormData = z.infer<typeof calculateFormSchema>;
 
@@ -91,7 +113,7 @@ export const Wrapper = () => {
             splitter: splitter!,
         };
 
-        validateInput(specs);
+        //validateInput(specs);
 
         /*if (Number.isNaN(distance)) {
             specs.distance = PONCalculator.CalculateDistance(specs);
@@ -135,7 +157,7 @@ export const Wrapper = () => {
     };
 
     return (
-        <main className="h-screen flex flex-col md:flex-row-reverse items-center justify-center">
+        <main className="h-full md:h-screen flex flex-col md:flex-row-reverse items-center justify-center">
             {distanceResult &&
                 transmissionResult &&
                 receptionResult &&

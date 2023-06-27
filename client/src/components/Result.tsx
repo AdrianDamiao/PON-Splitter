@@ -22,11 +22,11 @@ export const Result = (props: ResultProps) => {
     } = props;
 
     return (
-        <div className="my-4 w-full max-w-2xl px-8">
+        <div className="my-4 w-full max-w-2xl px-6">
             <div className="mt-3 w-full">
                 <Diagram splitter={splitterResult} />
             </div>
-            <div className="mt-6 relative border overflow-x-auto sm:rounded-lg">
+            <div className="mt-6 relative border overflow-x-auto rounded-xl">
                 <table className="w-full text-sm text-left text-gray-500">
                     <tbody>
                         <tr className="bg-white hover:bg-gray-50 border-b">
