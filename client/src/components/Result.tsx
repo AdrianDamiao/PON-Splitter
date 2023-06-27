@@ -39,7 +39,7 @@ export const Result = (props: ResultProps) => {
                             <td className="px-6 py-4 border-l">
                                 {Number(distanceResult.toFixed(2)) >= 0
                                     ? `${distanceResult.toFixed(2)} km`
-                                    : "0 km"}
+                                    : (<span>Distância incalculável</span>)}
                             </td>
                         </tr>
                         <tr className="bg-white hover:bg-gray-50 border-b">
@@ -74,7 +74,7 @@ export const Result = (props: ResultProps) => {
                             <td className="px-6 py-4 border-l">
                                 {Number(attenuationResult.toFixed(2)) >= 0
                                     ? `${attenuationResult.toFixed(2)} dB/km`
-                                    : "0 dB/km"}
+                                    : "0 dB/km"} 
                             </td>
                         </tr>
                         <tr className="bg-white hover:bg-gray-50 border-b">

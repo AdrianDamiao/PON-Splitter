@@ -206,7 +206,7 @@ export const Form = ({ calculate, calculateFormSchema }: any) => {
                         )}
                     </div>
                     <div className="col-span-6 sm:col-span-6">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label className="block mb-2 text-sm font-medium text-gray-900">
                             Splitter
                         </label>
                         <select
