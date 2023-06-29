@@ -97,23 +97,8 @@ export const Wrapper = () => {
             distance: (distanceUnit === "km"
                 ? distance
                 : distance! / 1000) as number,
-            //splitter: (Number(splitter) * -3).toString(),
             splitter: splitter!,
         };
-
-        //validateInput(specs);
-
-        /*if (Number.isNaN(distance)) {
-            specs.distance = PONCalculator.CalculateDistance(specs);
-        } else if (Number.isNaN(transmission)) {
-            specs.transmissionPower =
-                PONCalculator.CalculateTransmissionPower(specs);
-        } else if (Number.isNaN(reception)) {
-            specs.receptionPower = PONCalculator.CalculateReception(specs);
-        } else if (Number.isNaN(attenuation)) {
-            specs.attenuationCoefficient =
-                PONCalculator.CalculateCoefficient(specs);
-        }*/
 
         api.post("calcs/calculate", specs).then(
             (response: AxiosResponse<{ resource: number; result: number }>) => {
@@ -132,7 +117,6 @@ export const Wrapper = () => {
                         break;
                 }
 
-                //setSplitterResult((Number(specs.splitter) / -3).toString());
                 setSplitterResult(specs.splitter.toString());
                 setDistanceResult(specs.distance);
                 setTransmissionResult(specs.transmissionPower);

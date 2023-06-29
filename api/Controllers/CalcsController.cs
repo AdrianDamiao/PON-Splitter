@@ -12,23 +12,27 @@ namespace PonSpecsCalculator.Controllers
         {
         }
 
+        /// <summary>
+        /// Calculates PON Specifications.
+        /// </summary>
+        /// <param name="inputSpecs">The input specs.</param>
         [HttpPost]
         [Route("calculate")]
         public IActionResult CalculatePonSpecs(PonSpecs inputSpecs)
         {
-            if(inputSpecs.Distance == null)
+            if (inputSpecs.Distance == null)
             {
                 return Ok(new { Resource = CalculatedResource.Distance, Result = inputSpecs.CalculateDistance()!.Value });
             }
-            else if(inputSpecs.TransmissionPower == null)
+            else if (inputSpecs.TransmissionPower == null)
             {
                 return Ok(new { Resource = CalculatedResource.TransmissionPower, Result = inputSpecs.CalculateTransmissionPower()!.Value });
             }
-            else if(inputSpecs.ReceptionPower == null)
+            else if (inputSpecs.ReceptionPower == null)
             {
                 return Ok(new { Resource = CalculatedResource.ReceptionPower, Result = inputSpecs.CalculateReceptionPower()!.Value });
-            } 
-            else if(inputSpecs.AttenuationCoefficient == null)
+            }
+            else if (inputSpecs.AttenuationCoefficient == null)
             {
                 return Ok(new { Resource = CalculatedResource.AttenuationCoefficient, Result = inputSpecs.CalculateCoefficient()!.Value });
             }
