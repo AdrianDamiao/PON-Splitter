@@ -50,11 +50,11 @@ namespace PonSpecsCalculator.Models
             => Splitter switch
             {
                 Splitter.None => ConnectorAttenuation * 2 + (FusionPointAttenuation * 2),
-                Splitter.OneForTwo => ConnectorAttenuation * 3 + (FusionPointAttenuation * 2),
-                Splitter.OneForFour => ConnectorAttenuation * 5 + (FusionPointAttenuation * 2),
-                Splitter.OneForEight => ConnectorAttenuation * 9 + (FusionPointAttenuation * 2),
-                Splitter.OneForSixteen => ConnectorAttenuation * 17 + (FusionPointAttenuation * 2),
-                Splitter.OneForThirtyTwo => ConnectorAttenuation * 33 + (FusionPointAttenuation * 2),
+                Splitter.OneForTwo => ConnectorAttenuation * 4 + (FusionPointAttenuation * 2),
+                Splitter.OneForFour => ConnectorAttenuation * 4 + (FusionPointAttenuation * 2),
+                Splitter.OneForEight => ConnectorAttenuation * 4 + (FusionPointAttenuation * 2),
+                Splitter.OneForSixteen => ConnectorAttenuation * 4 + (FusionPointAttenuation * 2),
+                Splitter.OneForThirtyTwo => ConnectorAttenuation * 4 + (FusionPointAttenuation * 2),
                 _ => ConnectorAttenuation
             };
     }
